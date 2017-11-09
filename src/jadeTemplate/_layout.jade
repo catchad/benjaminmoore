@@ -1,0 +1,46 @@
+include /jadeTemplate/_mixin.jade
+
+block variables
+
+doctype html
+html(lang="zh-tw")
+	head
+		meta(charset="UTF-8")
+		meta(name="viewport", content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0")
+		title #{pageTitle} | 班傑明摩爾台灣 
+		link(rel="stylesheet", href="/assets/styles/base.css")
+		block style
+	body
+		header(class="header")
+			a(href="/")
+				img(class="header__logo", src="/assets/images/logo.svg", alt="benjamin moore logo")
+			svg(class="header__hamberger", width='50px', height='34px', viewbox='0 0 50 34')
+				g
+					rect(fill='#FFFFFF', width='50', height='2')
+					rect(y='32', fill='#FFFFFF', width='50', height='2')
+					rect(y='16', fill='#FFFFFF', width='50', height='2')
+			nav(class="nav")
+				ul(class="nav__list")
+					li(class="nav__item")
+						a(href="/about/") 關於班傑明．摩爾
+					li(class="nav__item")
+						a(href="/product/") 產品特色
+					li(class="nav__item")
+						a(href="/findcolor/") 尋找顏色
+					li(class="nav__item")
+						a(href="/inspiration/") 色彩靈感
+					li(class="nav__item")
+						a(href="/showcase/") 案例分享
+					li(class="nav__item")
+						a(href="/contact/") 聯絡我們
+					li(class="nav__item")
+						a(href="/news/") 最新消息
+		div(class="loading loading--active")
+			img(class="loading__img", src="/assets/images/logo_black.svg")
+		block body
+
+		
+		script(src="/assets/scripts/lib/jquery.min.js")
+		script(src="/assets/scripts/lib/TweenMax.min.js")
+		script(src="/assets/scripts/common.js")
+		block script

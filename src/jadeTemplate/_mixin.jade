@@ -1,0 +1,13 @@
+mixin vTab(data)
+	ul(class="vTab")
+		each item in data
+			li(class={'vTab__item': true, 'vTab__item--active': item.active})
+				div(class="vTab__nav")
+					div(class="vTab__dotContainer")
+						div(class="vTab__dot")
+				div(class="vTab__content")
+					p(class="vTab__title") 123#{item.title}456
+					div(class="vTab__textGroup")
+						each text in item.text
+							p(class="vTab__text") #{text}
+

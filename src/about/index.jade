@@ -1,0 +1,83 @@
+extends /jadeTemplate/_layout.jade
+
+block variables
+	- var pageTitle = "關於班傑明‧摩爾";
+
+block style
+	link(rel="stylesheet", href="/assets/styles/about.css")
+
+block body
+	//- div(class="debugLine")
+	main(class="dsLayout")
+		div(class="dsLayout__wrapper")
+			section(class="section")
+				div(class="dsLayout__fixedImgContainer dsLayout__fixedImgContainer--active")
+					img(class="dsLayout__fixedImg", src="/assets/images/test1.jpg")
+				div(class="title title--spaceBottom")
+					h1(class="title__name") History
+					p(class="title__description") 步步走來 昔日未來
+				p(class="section__text") 北美最愛油漆品牌-班傑明．摩爾(Benjamin Moore)，自1883年創立至今，秉持誠信精神經營品質與品牌，超過一個世紀，在兼顧環境維護的前提下，不斷提升生產技術、創新色彩、產品性能精益求精，奠定領導地位，帶動公司、員工及全球經銷商共同竭誠貢獻，在美國及加拿大擁有超過5000家專業經銷商，全球近500個國際經銷商，共同提供專業的服務。
+				p(class="section__text") 2000年加入波克夏．海瑟威的大家庭，成為巴菲特首次掌權的實業，Benjamin Moore班傑明．摩爾，再接再厲拓展全球專業行銷。
+				p(class="section__text") 2017年進駐台灣，首家旗艦店設立於台北美麗華商圈，美國總公司國際業務總監Mr. Philip Bishop 及加拿大督導Mr. Shafiqui Shivji 親臨現場主持開幕儀式，各界專家及廠商參觀，盛況熱絡。
+			section(class="section")
+				div(class="dsLayout__fixedImgContainer")
+					img(class="dsLayout__fixedImg", src="/assets/images/test2.jpg")
+
+				div(class="title title--spaceBottom")
+					h1(class="title__name") Milestones
+					p(class="title__description") 里程碑
+				+vTab([
+					{title:"1883年", active:true, text:["摩爾兄弟在紐約布魯克林創立第一家班傑明‧摩爾專賣店"]},
+					{title:"1907年", active:false, text:["班傑明‧摩爾雇用了第一位化學家並成立了研究部門"]},
+					{title:"1957年", active:false, text:["REGAL經典系列 水性乳膠漆誕生，利用好施工的設計開啟了DIY的市場"]},
+					{title:"1982年", active:false, text:["油漆產業第一，Moore's Computer Color Matching System（電腦對色技術） 問世，班傑明‧摩爾經銷商現在不用再被色卡所限制，現在經銷商可以利用任何樣品對色"]},
+					{title:"2000年", active:false, text:["班傑明‧摩爾加入波克夏•哈薩威家族"]},
+					{title:"2005年", active:false, text:["專利Gennex®水性調色系統誕生Benjamin Moore 塗料以Gennex®專利色漿, 生產出的色彩都具有超強耐久力,超過3,500種顏色可供選擇, 滿足各種需求"]},
+					{title:"2008年", active:false, text:["AURA 永恆系列 專利鎖色技術發展成功問世"]},
+					{title:"2017年", active:false, text:["進駐台灣"]}
+				])
+
+				//- ul(class="vTab")
+				//- 	li(class="vTab__item vTab__item--active")
+				//- 		div(class="vTab__nav")
+				//- 			div(class="vTab__dotContainer")
+				//- 				div(class="vTab__dot")
+				//- 		div(class="vTab__content")
+				//- 			p(class="vTab__title") 1883年
+				//- 			div(class="vTab__textGroup")
+				//- 				p(class="vTab__text") 製作餅皮，餅乾放入較厚的食物袋中，用桿麵棍敲碎。將融化的奶油稍微冷卻後備用。
+				//- 				p(class="vTab__text") 製作餅皮，餅乾放入較厚的食物袋中，用桿麵棍敲碎。將融化的奶油稍微冷卻後備用。製作餅皮，餅乾放入較厚的食物袋中，用桿麵棍敲碎。將融化的奶油稍微冷卻後備用。
+
+
+
+			section(class="section")
+				div(class="dsLayout__fixedImgContainer")
+					img(class="dsLayout__fixedImg", src="/assets/images/test3.jpg")
+				div(class="title title--spaceBottom")
+					h1(class="title__name") Promise
+					p(class="title__description") Benjamin Moore 的綠色承諾
+
+				p(class="section__text") 班傑明．摩爾的綠色承諾，是公司對產品的保證，在嚴酷的環境下進行VOC、揮發物、塗刷度、耐洗度以及包裝的測試，均達到或甚至超越標準，同時也提供班傑明．摩爾獨特的卓越效能。用品質卓越的塗料，守護您的居家環境，讓色彩增添家的溫度，增加魅力與價值。GennexⓇ專利色漿，讓BENJAMIN MOORE 色彩豐富飽和，色彩亮麗持久。採用自製的基漆以及專利 Gennex Ⓡ色漿，在調色前後均不含 VOC，符合並超越嚴格的北美塗料環保標準。基礎樹脂，塗刷後形成一層膠膜，可用乾淨柔性抹布擦拭清潔。面漆具有高效的覆蓋性，可以覆蓋深淺色。 底漆隔絕性良好，快乾，可快速進行面漆施作。
+				p(class="section__heading") 綠色環保標準
+				p(class="section__text") 塗料及其他相關產品的環保標準是由多家第三方組織制定，針對節能、節水、減少二氧化碳污染、改善室內環境品質等效能評鑑，第三方認證組織包括：
+				ul(class="list")
+					li(class="list__item") GREEN SEAL 美國綠色認證
+					li(class="list__item") MPI 塗料專家協會
+					li(class="list__item") CHPS 加州高性能研究會
+					li(class="list__item") GREENGUARD 美國綠色衛士環境研究所
+					li(class="list__item") LEED 美國綠色建築協會的領先能源及環境設計
+					li(class="list__item") CRADLE TO CRADLE 搖籃到搖籃生產履歷評鑑
+
+				p(class="section__heading") 什麼是 VOC ？
+				p(class="section__text") 揮發性有機化合物（VOC）是在一般室溫下具有高揮發性的有機化學氣體，VOC是多種多樣的無處不在的，它們包括人造和天然存在的化合物。大多數香味或氣味是揮發性有機化合物。VOC可引起急性症狀，包括頭痛和頭暈。在聯邦政府提出要求的數年前：我們就已經將Benjamin Moore 塗料中的鉛，甲醛和汞移除，以符合VOC標準。
+
+			section(class="section")
+				div(class="dsLayout__fixedImgContainer")
+					img(class="dsLayout__fixedImg", src="/assets/images/test4.jpg")
+				div(class="title title--spaceBottom")
+					h1(class="title__name") 產品特色
+					p(class="title__description") 百年色彩專家
+
+				p(class="section__text") 作為國際色彩研究機構CMG的成員, Benjamin Moore生產自己的基礎漆以及獨家專利的綠色環保Gennex®色漿專利技術，提供產品優越的性能，再配上多樣且鮮豔繽紛的色彩，每年推出新的色板組合，迄今為止已經擁有超過三千多種顏色。 Benjamin Moore 的大型科技實驗所也不斷提升產品技術，由底漆、室內塗料到室外塗料，都有易塗刷、耐擦洗、低／零VOC、低氣味、遮蓋力強、色彩持久等突出特點，質量遠超過多項國際嚴格環保標準，並數次獲選為北美最受顧客信賴的塗料品牌。Benjamin Moore班傑明．摩爾油漆是讓您在每次的使用能輕鬆達到持久完美的最佳選擇。
+block script
+	script(src="/assets/scripts/about.js")
