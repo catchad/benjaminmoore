@@ -3,7 +3,40 @@ extends /jadeTemplate/_layout.jade
 block variables
 	- var pageTitle = "產品特色";
 
+block style
+	link(rel="stylesheet", href="/assets/styles/product.css")
+
 block body
-	p product 產品特色
+	main.prLayout
+		div.prLayout__wrapper
+			section.section
+				+level([
+					{title:"oil",name:"油"},
+					{title:"water",name:"水"},
+					{title:"CO2",name:"二氧化碳"},
+					{title:"O2",name:"氧氣"},
+					{title:"Na",name:"鈉"},
+					{title:"H2O2",name:"雙氧水"}
+				])
+
+
+
+				//- ul.level
+				//- 	li.level__item
+				//- 		div.prLayout__imgTextContainer
+				//- 			img.prLayout__img(src="https://api.fnkr.net/testimg/350x200/FFF/?text=Oil")
+				//- 			div.prLayout__text
+				//- 				h3.prLayout__eng oil
+				//- 				p.prLayout__chi 油
+
+
+				
+				
+					
+			
+
+
+
+
 
 block script
