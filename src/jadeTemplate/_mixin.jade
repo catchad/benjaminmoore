@@ -16,8 +16,8 @@ mixin level(data)
 	ul(class="level")
 		each item in data
 			li(class="level__item")
-				div(class="div.prLayout__imgTextContainer")
-					img(class="prLayout__img" src="https://api.fnkr.net/testimg/350x200/FFF/?text=#{item.title}")
+				div(class="prLayout__imgTextContainer")
+					img(class="prLayout__img" src="/assets/images/#{item.url}.png")
 					div(class="prLayout__text")
 						h3(class="prLayout__eng") #{item.title}
 						p(class="prLayout__chi") #{item.name}
