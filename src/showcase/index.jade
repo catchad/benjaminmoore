@@ -3,7 +3,31 @@ extends /jadeTemplate/_layout.jade
 block variables
 	- var pageTitle = "案例分享";
 
+block style
+	link(rel="stylesheet", href="/assets/styles/showcase.css")
+
 block body
-	p showcase 案例分享
+	main.shLayout
+	div.shLayout__wrapper
+		section.section
+			+case([
+				{title:"台北松山",text:"假字假字假字假字假字假字"},
+				{title:"台北內湖",text:"假字假字假字假字假字假字"},
+				{title:"台北中山",text:"假字假字假字假字假字假字"},
+				{title:"台北五股",text:"假字假字假字假字假字假字"},
+				{title:"台北信義",text:"假字假字假字假字假字假字"},
+				{title:"台北三重",text:"假字假字假字假字假字假字"},
+				{title:"台北蘆洲",text:"假字假字假字假字假字假字"},
+				{title:"台北板橋",text:"假字假字假字假字假字假字"},
+				{title:"台北新莊",text:"假字假字假字假字假字假字"}
+			])
+
+
+			//- ul.case
+			//- 	li.case__item
+			//- 		div.case__imgTextContainer
+			//- 			div.case__textBox
+			//- 				h2.case__tittle
+			//- 				p.case__text
 
 block script

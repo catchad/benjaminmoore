@@ -16,9 +16,31 @@ mixin level(data)
 	ul(class="level")
 		each item in data
 			li(class="level__item")
-				div(class="prLayout__imgTextContainer")
-					img(class="prLayout__img" src="/assets/images/#{item.url}.png")
-					div(class="prLayout__text")
-						h3(class="prLayout__eng") #{item.title}
-						p(class="prLayout__chi") #{item.name}
+				div(class="level__imgTextContainer")
+					img(class="level__img" src="/assets/images/#{item.url}.png")
+					div(class="level__text")
+						h3(class="level__eng") #{item.title}
+						p(class="level__chi") #{item.name}
+
+
+mixin ideal(data)
+	ul(class="ideal")
+		each item in data
+			li(class="ideal__item")
+				div(class="ideal__imgTextContainer")
+					div(class="ideal__textBox")
+						h3(class="ideal__title") #{item.title}
+						p(class="ideal__text") #{item.text}
+				div(class="ideal__background")
+
+
+mixin case(data)
+	ul(class="case")
+		each item in data
+			li(class="case__item")
+				div(class="case__imgTextContainer")
+					div(class="case__textBox")
+						h3(class="case__title") #{item.title}
+						p(class="case__text") #{item.text}
+				div(class="case__background")
 

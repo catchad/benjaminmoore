@@ -3,8 +3,30 @@ extends /jadeTemplate/_layout.jade
 block variables
 	- var pageTitle = "色彩靈感";
 
+block style
+	link(rel="stylesheet", href="/assets/styles/inspiration.css")
+
 block body
-	main
-		p inspiration 色彩靈感
+	main.inLayout
+	div.inLayout__wrapper
+		section.section
+			+ideal([
+				{title:"2018色彩趨勢",text:"假字假字假字假字假字假字"},
+				{title:"2017色彩趨勢",text:"假字假字假字假字假字假字"},
+				{title:"2016色彩趨勢",text:"假字假字假字假字假字假字"},
+				{title:"秋冬居家色彩",text:"假字假字假字假字假字假字"},
+				{title:"2018色彩趨勢",text:"假字假字假字假字假字假字"},
+				{title:"2017色彩趨勢",text:"假字假字假字假字假字假字"},
+				{title:"2016色彩趨勢",text:"假字假字假字假字假字假字"},
+				{title:"春夏家居色彩",text:"假字假字假字假字假字假字"},
+				{title:"2018色彩趨勢",text:"假字假字假字假字假字假字"}
+			])
+
+			//- ul.ideal
+			//- 	li.ideal__item
+			//- 		div.ideal__imgTextContainer
+			//- 			div.ideal__textBox
+			//- 				h2.ideal__tittle
+			//- 				p.ideal__text
 
 block script

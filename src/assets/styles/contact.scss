@@ -1,0 +1,26 @@
+@charset "UTF-8";
+@import "_common.scss";
+
+
+.dsLayout{
+	left: 50%;
+	&__fixedImgContainer{
+		left: 0%;
+	}
+	@media screen and (max-width: $breakpoint-md){
+		left: 0%;	
+		&__fixedImgContainer{
+			left: 50%;
+		}
+	}
+}
+.section{
+	&:first-child{
+		margin-top: 160px;
+	}
+	@media screen and (max-width: $breakpoint-md){
+		&:first-child{
+			margin-top: 0px;
+		}
+	}
+}

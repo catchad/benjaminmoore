@@ -7,17 +7,18 @@
 	&__wrapper{
 		width: 100%;
 	}
+	
+	
+}
+.level{
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
 	&__imgTextContainer{
 		width: 100%;
-		text-align: center;
 		box-sizing:border-box;
 		padding-top: 30px;
-		&:hover .prLayout__img{
-			transform: scale(1.4, 1.4) translateY(20px);
-		}
-		&:hover .prLayout__text{
-			opacity: 0;
-		}
+		
 	}
 	&__img{
 		transition:.5s;
@@ -30,15 +31,17 @@
 	&__eng{
 		margin-bottom: 10px;
 	}
-}
-.level{
-	width: 100%;
-	display: flex;
-	flex-wrap: wrap;
 	&__item{
 		width: 25%;
+		text-align: center;
 		background-color: #EFEFEF;
 		cursor:pointer;
+		&:hover .level__img{
+			transform: scale(1.4, 1.4) translateY(20px);
+		}
+		&:hover .level__text{
+			opacity: 0;
+		}
 		&:nth-child(8n+2),
 		&:nth-child(8n+4),
 		&:nth-child(8n+5),
