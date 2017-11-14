@@ -24,15 +24,21 @@
 		&:hover .case__background{
 			opacity: 0;
 		}
-		&:hover .case__imgTextContainer{
-			transform:scale(1.1);
-		}
+		// &:hover .case__imgTextContainer{
+		// 	background-size: 120% 120%;
+		// 	background-position: center center;
+		// }
 		@mixin item ( $items ) {
 			@for $i from 1 through $items{
 				&:nth-child(#{$i}) .case__imgTextContainer{
 					background-image: url('../images/case#{$i}.jpg');
 					background-size: 100% 100%;
 					background-repeat: no-repeat;
+					background-position: center center;
+					&--active{
+						background-size: 120% 120%;
+						background-position: center center;
+					}
 				}
 			}
 		}
@@ -50,6 +56,10 @@
 			content: '';
 			display: block;
 			padding-bottom: 100%;
+		}
+		&--active{
+			background-size: 120% 120%;
+			background-position: center center;
 		}
 	}
 	&__textBox{

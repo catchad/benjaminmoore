@@ -30,3 +30,9 @@ block body
 			//- 				p.ideal__text
 
 block script
+	script.
+		$('.ideal__item').hover(function(){
+			$(this).children('.ideal__imgTextContainer').addClass('ideal__imgTextContainer--active');
+		},function(){
+			$(this).children('.ideal__imgTextContainer').removeClass('ideal__imgTextContainer--active');
+		})

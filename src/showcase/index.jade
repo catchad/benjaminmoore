@@ -31,3 +31,9 @@ block body
 			//- 				p.case__text
 
 block script
+	script.
+		$('.case__item').hover(function(){
+			$(this).children('.case__imgTextContainer').addClass('case__imgTextContainer--active');
+		},function(){
+			$(this).children('.case__imgTextContainer').removeClass('case__imgTextContainer--active');
+		})
