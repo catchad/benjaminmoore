@@ -35,7 +35,7 @@ block script
 	script.
 		if( device.desktop() == true ) ulResize();
 
-		$(window).on('resize',ulResize);
+		$(window).on('resize',checkSize);
 
 		function checkSize(){
 			if( device.desktop() == true ) ulResize();

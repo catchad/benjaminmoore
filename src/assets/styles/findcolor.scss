@@ -1,32 +1,32 @@
 @charset "UTF-8";
 @import "_common.scss";
 
-.inLayout{
-	width: 100%;
-	padding: 0px;
-	&__wrapper{
-		width: 100%;
+.dsLayout{
+	&__fixedImgContainer {	
+		@media screen and (max-width: $breakpoint-md ) {
+		    &::before {
+		    	content: "";
+		    	display: block;
+		    	padding-top: 0%;
+		    }
+		}
 	}
 }
-.section{
-	margin-bottom: 0;
-}
-.ideal{
+
+.space{
 	width: 100%;
+	height: 100%;
 	display: flex;
 	flex-wrap: wrap;
 	&__item{
-		width: 25%;
+		width: 50%;
 		cursor:pointer;
 		position: relative;
 		overflow: hidden;
 		z-index: 1;
-		&:hover .ideal__imgTextContainer .ideal__textBox,
-		&:hover .ideal__background{
+		&:hover .space__imgTextContainer .space__textBox,
+		&:hover .space__background{
 			opacity: 0;
-		}
-		@media screen and (max-width: $breakpoint-lg){
-			width: 33%;
 		}
 		@media screen and (max-width: 650px){
 			width: 50%;
@@ -34,12 +34,12 @@
 		@media screen and (max-width: 320px){
 			width: 100%;
 		}
-		// &:hover .ideal__imgTextContainer{
+		// &:hover .space__imgTextContainer{
 		// 	transform:scale(1.1);
 		// }
 		@mixin item ( $items ) {
 			@for $i from 1 through $items{
-				&:nth-child(#{$i}) .ideal__imgTextContainer{
+				&:nth-child(#{$i}) .space__imgTextContainer{
 					background-image: url('../images/case#{$i}.jpg');
 					background-size: 100% 100%;
 					background-repeat: no-repeat;
@@ -51,10 +51,11 @@
 				}
 			}
 		}
-		@include item(9);
+		@include item(4);
 	}
 	&__imgTextContainer{
 		width: 100%;
+		height: 100%;
 		box-sizing:border-box;
 		display: flex;
 		justify-content: center;
@@ -74,8 +75,16 @@
 		z-index: 1;
 	}
 	&__title{
-		font-size: 24px;
-		margin-bottom: 20px;
+		font-size: 4em;
+		margin-bottom: 15px;
+	}
+	&__text{
+		font-size: 1.6em;
+	    line-height: 1.6em;
+	    letter-spacing: 0.1em;
+	    margin: 0;
+	    font-weight: 100;
+	    margin-bottom: 23px;
 	}
 	&__background{
 		width: 100%;

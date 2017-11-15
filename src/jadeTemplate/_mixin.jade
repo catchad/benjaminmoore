@@ -23,6 +23,17 @@ mixin level(data)
 						p(class="level__chi") #{item.name}
 
 
+mixin space(data)
+	ul(class="space")
+		each item in data
+			li(class="space__item")
+				div(class="space__imgTextContainer")
+					div(class="space__textBox")
+						h2(class="space__title") #{item.title}
+						p(class="space__text") #{item.text}
+				div(class="space__background")
+
+
 mixin ideal(data)
 	ul(class="ideal")
 		each item in data
