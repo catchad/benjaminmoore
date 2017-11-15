@@ -36,13 +36,21 @@ block body
 				//- 				p.prLayout__chi 油
 
 
-				
-				
-					
-			
-
-
-
-
-
 block script
+	script(src="//cdnjs.cloudflare.com/ajax/libs/device.js/0.2.7/device.min.js")
+	script.
+		if( device.desktop() == true ) ulResize();
+		
+		$(window).on('resize',checkSize);
+
+		function checkSize(){
+			if( device.desktop() == true ) ulResize();
+		}
+
+		function ulResize(){
+			var wh = window.innerHeight ,
+				headerHeight = $('.header').innerHeight() ,
+				forLi = wh - headerHeight;
+
+			$('.level__item').css('height',forLi/2);
+		}

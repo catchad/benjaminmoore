@@ -16,16 +16,14 @@
 	flex-wrap: wrap;
 	&__imgTextContainer{
 		width: 100%;
-		box-sizing:border-box;
-		padding-top: 30px;
-		
+		height: 100%;
 	}
 	&__img{
 		transition:.5s;
 	}
 	&__text{
 		box-sizing:border-box;
-		padding: 20px 0px;
+		margin: 20px 0px;
 		transition:.3s;
 	}
 	&__eng{
@@ -36,6 +34,9 @@
 		text-align: center;
 		background-color: #EFEFEF;
 		cursor:pointer;
+		display: flex;
+		justify-content:center;
+		align-items:center;
 		&:hover .level__img{
 			transform: scale(1.4, 1.4) translateY(20px);
 		}

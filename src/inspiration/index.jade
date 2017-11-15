@@ -8,19 +8,19 @@ block style
 
 block body
 	main.inLayout
-	div.inLayout__wrapper
-		section.section
-			+ideal([
-				{title:"2018色彩趨勢",text:"假字假字假字假字假字假字"},
-				{title:"2017色彩趨勢",text:"假字假字假字假字假字假字"},
-				{title:"2016色彩趨勢",text:"假字假字假字假字假字假字"},
-				{title:"秋冬居家色彩",text:"假字假字假字假字假字假字"},
-				{title:"2018色彩趨勢",text:"假字假字假字假字假字假字"},
-				{title:"2017色彩趨勢",text:"假字假字假字假字假字假字"},
-				{title:"2016色彩趨勢",text:"假字假字假字假字假字假字"},
-				{title:"春夏家居色彩",text:"假字假字假字假字假字假字"},
-				{title:"2018色彩趨勢",text:"假字假字假字假字假字假字"}
-			])
+		div.inLayout__wrapper
+			section.section
+				+ideal([
+					{title:"2018色彩趨勢",text:"假字假字假字假字假字假字"},
+					{title:"2017色彩趨勢",text:"假字假字假字假字假字假字"},
+					{title:"2016色彩趨勢",text:"假字假字假字假字假字假字"},
+					{title:"秋冬居家色彩",text:"假字假字假字假字假字假字"},
+					{title:"2018色彩趨勢",text:"假字假字假字假字假字假字"},
+					{title:"2017色彩趨勢",text:"假字假字假字假字假字假字"},
+					{title:"2016色彩趨勢",text:"假字假字假字假字假字假字"},
+					{title:"春夏家居色彩",text:"假字假字假字假字假字假字"},
+					{title:"2018色彩趨勢",text:"假字假字假字假字假字假字"}
+				])
 
 			//- ul.ideal
 			//- 	li.ideal__item
@@ -30,7 +30,24 @@ block body
 			//- 				p.ideal__text
 
 block script
+	script(src="//cdnjs.cloudflare.com/ajax/libs/device.js/0.2.7/device.min.js")
 	script.
+		if( device.desktop() == true ) ulResize();
+
+		$(window).on('resize',ulResize);
+
+		function checkSize(){
+			if( device.desktop() == true ) ulResize();
+		}
+
+		function ulResize(){
+			var wh = window.innerHeight ,
+				headerHeight = $('.header').innerHeight() ,
+				forLi = wh - headerHeight;
+
+			$('.ideal__item').css('height',forLi/2);
+		}
+
 		$('.ideal__item').hover(function(){
 			$(this).children('.ideal__imgTextContainer').addClass('ideal__imgTextContainer--active');
 		},function(){
