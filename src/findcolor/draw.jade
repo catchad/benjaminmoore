@@ -15,10 +15,11 @@ block body
 		.ui
 			.ui__top
 				.color-info
-					.color-info__name Stonington Gray HC-170
-					.color-info__color
-					.color-info__like-btn
-					.color-info__collect-btn
+					.color-info__name 
+					.color-info__btn-list
+						.color-info__color
+						.color-info__like-btn
+						.color-info__collect-btn
 				.color-picker
 					.color-picker__title 選擇色系
 					.color-picker__wheel
@@ -26,8 +27,33 @@ block body
 				.color-select
 					.color-select__title 選擇產品顏色
 					.color-select__list
-						.color-select__color(data-hex="#fff" data-name="ss")
 		.collection
+			.collection__opener
+				img.collection__icon(src="/assets/images/collectbox_icon.png", alt="")
+			.collection__container
+				.collection__btn-list
+					.collection__edit-btn
+					.collection__mail-btn
+				.collection__title 我收藏的顏色
+				.collection__list
+					.color-item
+						.color-item__delete-btn ×
+						.color-item__color
+						.color-item__name Stonington Gray HC-170
+					.color-item
+						.color-item__delete-btn ×
+						.color-item__color
+						.color-item__name Stonington Gray HC-170
+					.color-item
+						.color-item__delete-btn ×
+						.color-item__color
+						.color-item__name Stonington Gray HC-170
+					.color-item
+						.color-item__delete-btn ×
+						.color-item__color
+						.color-item__name Stonington Gray HC-170
+
+
 
 		//- input#color-picker
 block script

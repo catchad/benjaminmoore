@@ -30,14 +30,27 @@
 	width: 100%;
 	height: calc(100vh - 60px);
 	display: flex;
-	justify-content: flex-end;
+	justify-content: flex-start;
 	padding: 0;
+	// margin-left: 0;
+	transform: translateX(0px);
+	transition: 0.3s;
+	// overflow-y: hidden;
 	@media screen and (max-width: $breakpoint-md ) {
 	    flex-wrap: wrap;
+	}
+	&--collection-active {
+		// margin-left: -250px;
+		transform: translateX(-250px); 
+		@media screen and (max-width: $breakpoint-md ) {
+		    // margin-left: 0;
+		    transform: translateX(0px);
+		}
 	}
 	.image {
 		position: relative;
 		width: calc(100% - 400px);
+		flex: 0 0 auto;
 		height: 100%;
 		background-color: #333;
 		overflow: hidden;
@@ -71,7 +84,8 @@
 		position: relative;
 		width: 350px;
 		height: 100%;
-		background-color: #777;
+		flex: 0 0 auto;
+		overflow: hidden;
 		@media screen and (max-width: $breakpoint-md ) {
 		    width: 100%;
 		    height: auto;
@@ -88,11 +102,8 @@
 			.color-info {
 				display: flex;
 				align-items: center;
-				// justify-content: space-around;
+				justify-content: space-between;
 				margin-bottom: 20px;
-				div {
-					margin-right: 10px;
-				}
 				&__name {
 					font-size: 0.9em;
 				}
@@ -101,12 +112,24 @@
 					height: 35px;
 					border-radius: 100%;
 					background-color: #B0C8C8;
+					border: 1px solid #ccc;
+					margin-right: 10px;
+				}
+				&__btn-list {
+					display: flex;
+					align-items: center;
 				}
 				&__like-btn {
 					width: 35px;
 					height: 35px;
 					border-radius: 100%;
-					border: 1px solid #000;
+					// border: 1px solid #000;
+					background-image: url("../images/like_btn.png");
+					background-size: 100% 100%;
+					cursor: pointer;
+					&--liked {
+						background-image: url("../images/like_btn_liked.png");
+					}
 				}
 				&__collect-btn {
 					display: none;
@@ -132,18 +155,23 @@
 			position: relative;
 			width: 100%;
 			height: calc(100% - 350px);
-			background-color: #eee;
+			background-color: #f9f9f9;
 			padding: 50px 40px 30px 40px;
 			.color-select {
+				height: 100%;
 				&__title {
 					margin-bottom: 20px;
 					font-size: 1.2em;
 				}
 				&__list {
 					width: 100%;
+					height: 100%;
+					padding-bottom: 20px;
 					display: flex;
 					flex-wrap: wrap;
 					justify-content: flex-start;
+					// align-items: center;
+					align-content: flex-start;
 					overflow: scroll;
 				}
 				&__color {
@@ -153,18 +181,116 @@
 					border: 1px solid #000;
 					margin: 10px 20px 10px 0;
 					cursor: pointer;
+					&--selected {
+						border: 2px solid #000;
+					}
 				}
 			}
 		}
 
 	}
+	// .collection__container
+	// 	.collection__btn-list
+	// 		.collection__edit-btn
+	// 		.collection__mail-btn
+	// 	.collection__title 
+	// 	.collection__list
+	// 		.color-item
+	// 			.color-item__delete-btn
+	// 			.color-item__color
+	// 			.color-item__name 
 	.collection {
 		position: relative;
-		width: 50px;
+		width: 350px;
 		height: 100%;
-		background-color: #ddd;
+		flex: 0 0 auto;
+		background-color: #ebebeb;
+		display: flex;
+		justify-content: flex-start;
 		@media screen and (max-width: $breakpoint-md ) {
 		    display: none;
+		}
+		&__opener {
+			height: 100%;
+			width: 50px;
+			// background-color: #444;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			cursor: pointer;
+		}
+		&__icon {
+			width: 60%;
+		}
+		&__container {
+			height: 100%;
+			width: calc(100% - 50px);
+			display: flex;
+			flex-direction: column;
+			padding: 50px 0;
+		}
+		&__btn-list {
+			display: flex;
+			justify-content: flex-start;
+			margin-bottom: 30px;
+		}
+		&__edit-btn {
+			width: 35px;
+			height: 35px;
+			background-image: url("../images/edit_btn.png");
+			background-size: 100% 100%;
+			cursor: pointer;
+			margin-right: 10px;
+			&--selected {
+				background-image: url("../images/edit_btn_selected.png");
+			}
+		}
+		&__mail-btn {
+			width: 35px;
+			height: 35px;
+			background-image: url("../images/mail_btn.png");
+			background-size: 100% 100%;
+			cursor: pointer;
+		}
+		&__title {
+			font-size: 1.2em;
+		}
+		&__list {
+			margin-top: 20px;
+		}
+		.color-item {
+			display: flex;
+			align-items: center;
+			margin-bottom: 15px;
+			&__delete-btn {
+				width: 20px;
+				height: 20px;
+				border-radius: 100%;
+				border: 1px solid #ccc;
+				background-color: #bbb;
+				color: #777;
+				font-size: 0.8em;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				margin-right: 5px;
+				cursor: pointer;
+				display: none;
+				&--active {
+					display: flex;
+				}
+			}
+			&__color {
+				width: 20px;
+				height: 20px;
+				border-radius: 100%;
+				border: 1px solid #ccc;
+				background-color: #B0C8C8;
+				margin-right: 8px;
+			}
+			&__name {
+				font-size: 0.9em;
+			}
 		}
 	}
 
