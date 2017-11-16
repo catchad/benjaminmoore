@@ -23,10 +23,10 @@ gulp.task('images', ['clean-images'], function() {
 
 // css
 gulp.task('clean-css', function() {
-    return gulp.src('build/assets/styles/*', {
-            read: false
-        })
-        .pipe(clean());
+    // return gulp.src('build/assets/styles/*', {
+    //         read: false
+    //     })
+    //     .pipe(clean());
 });
 gulp.task('css', ['clean-css'], function() {
     return gulp.src('src/assets/styles/*.scss')
@@ -48,10 +48,10 @@ gulp.task('css', ['clean-css'], function() {
 
 // js
 gulp.task('clean-js', function() {
-    return gulp.src('build/assets/scripts/*', {
-            read: false
-        })
-        .pipe(clean());
+    // return gulp.src('build/assets/scripts/*', {
+    //         read: false
+    //     })
+    //     .pipe(clean());
 });
 gulp.task('concat-js', function() {
     // return gulp.src(['src/assets/scripts/lib/jquery-3.0.0.min.js', 'src/assets/scripts/lib/TweenMax.min.js', 'src/assets/scripts/lib/device.min.js', 'src/assets/scripts/lib/imagesloaded.pkgd.min.js', 'src/assets/scripts/lib/slick.min.js', 'src/assets/scripts/lib/easeljs-0.8.2.min.js', 'src/assets/scripts/lib/preloadjs-0.6.2.min.js'])
@@ -70,10 +70,10 @@ gulp.task('js', ['clean-js', 'concat-js'], function() {
 
 // JADE to HTML
 gulp.task('clean-html', function() {
-    return gulp.src('build/*.html', {
-            read: false
-        })
-        .pipe(clean());
+    // return gulp.src('build/*.html', {
+    //         read: false
+    //     })
+    //     .pipe(clean());
 });
 gulp.task('html', ['clean-html'], function() {
     gulp.src('src/**/[^_]*.jade')
@@ -96,7 +96,7 @@ gulp.task('watch', function() {
 gulp.task('webserver', function() {
     gulp.src('build/')
         .pipe(webserver({
-            host: '0.0.0.0',
+            // host: '0.0.0.0',
             port: 9527,
             livereload: true,
             directoryListing: false,

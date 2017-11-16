@@ -32,10 +32,9 @@
 	display: flex;
 	justify-content: flex-end;
 	padding: 0;
-	// @media screen and (max-width: $breakpoint-md ) {
-	//     width: 100%;
-	//     padding: 0 40px;
-	// }
+	@media screen and (max-width: $breakpoint-md ) {
+	    flex-wrap: wrap;
+	}
 	.image {
 		position: relative;
 		width: calc(100% - 400px);
@@ -49,11 +48,23 @@
 			width: 100%;
 			height: auto;
 			transform: translate(-50%, -50%);
-
+			@media screen and (max-width: $breakpoint-md ) {
+				position: relative;
+			    width: 100%;
+			    height: auto;
+			}
 			&--heightFirst {
 				width: auto;
 				height: 100%;
+				@media screen and (max-width: $breakpoint-md ) {
+				    width: 100%;
+				    height: auto;
+				}
 			}
+		}
+		@media screen and (max-width: $breakpoint-md ) {
+		    width: 100%;
+		    height: auto;
 		}
 	}
 	.ui {
@@ -61,6 +72,10 @@
 		width: 350px;
 		height: 100%;
 		background-color: #777;
+		@media screen and (max-width: $breakpoint-md ) {
+		    width: 100%;
+		    height: auto;
+		}
 		&__top {
 			position: relative;
 			width: 100%;
@@ -82,17 +97,15 @@
 					font-size: 0.9em;
 				}
 				&__color {
-					width: 30px;
-					height: 30px;
-
+					width: 35px;
+					height: 35px;
 					border-radius: 100%;
 					background-color: #B0C8C8;
 				}
 				&__like-btn {
-					width: 30px;
-					height: 30px;
+					width: 35px;
+					height: 35px;
 					border-radius: 100%;
-					// background-color: #d24;
 					border: 1px solid #000;
 				}
 				&__collect-btn {
@@ -120,10 +133,27 @@
 			width: 100%;
 			height: calc(100% - 350px);
 			background-color: #eee;
+			padding: 50px 40px 30px 40px;
 			.color-select {
-				&__title {}
-				&__list {}
-				&__color {}
+				&__title {
+					margin-bottom: 20px;
+					font-size: 1.2em;
+				}
+				&__list {
+					width: 100%;
+					display: flex;
+					flex-wrap: wrap;
+					justify-content: flex-start;
+					overflow: scroll;
+				}
+				&__color {
+					width: 40px;
+					height: 40px;
+					border-radius: 100%;
+					border: 1px solid #000;
+					margin: 10px 20px 10px 0;
+					cursor: pointer;
+				}
 			}
 		}
 
@@ -133,6 +163,14 @@
 		width: 50px;
 		height: 100%;
 		background-color: #ddd;
+		@media screen and (max-width: $breakpoint-md ) {
+		    display: none;
+		}
+	}
+
+	#color-picker {
+		position: absolute;
+		top: -9999px;
 	}
 }
 	
