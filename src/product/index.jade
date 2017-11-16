@@ -3,7 +3,54 @@ extends /jadeTemplate/_layout.jade
 block variables
 	- var pageTitle = "產品特色";
 
+block style
+	link(rel="stylesheet", href="/assets/styles/product.css")
+
 block body
-	p product 產品特色
+	main.prLayout
+		div.prLayout__wrapper
+			section.section
+				+level([
+					{url:"color-sample",title:"COLOR SAMPLE",name:"色樣系列"},
+					{url:"natura",title:"NATURA",name:"自然系列"},
+					{url:"fresh-start",title:"FRESH START"},
+					{url:"aura-grand-entrance",title:"AURA GRAND ENTRANCE",name:"永恆大門系列"},
+					{url:"ultra-spec-scuff-x",title:"ULTRA SPEC SCUFF-X",name:"極致耐磨系列"},
+					{url:"ceiling-paint",title:"CEILING PAINT"},
+					{url:"aura",title:"AURA",name:"永恆系列"},
+					{url:"aura-bath&spa",title:"AURA BATH & SPA",name:"永恆系列"},
+					{url:"ultra-spec-500",title:"ULTRA SPEC 500",name:"極致系列"},
+					{url:"advance",title:"ADVANCE"},
+					{url:"ultra-spec",title:"ULTRA SPEC",name:"金屬專用底漆"},
+					{url:"insl-x-stix",title:"INSL-X STIX",name:"特殊面專用底漆"},
+					{url:"regal",title:"REGAL® SELECT",name:"經典系列"}
+				])
+
+
+				//- ul.level
+				//- 	li.level__item
+				//- 		div.prLayout__imgTextContainer
+				//- 			img.prLayout__img(src="https://api.fnkr.net/testimg/350x200/FFF/?text=Oil")
+				//- 			div.prLayout__text
+				//- 				h3.prLayout__eng oil
+				//- 				p.prLayout__chi 油
+
 
 block script
+	script(src="//cdnjs.cloudflare.com/ajax/libs/device.js/0.2.7/device.min.js")
+	script.
+		if( device.desktop() == true ) ulResize();
+		
+		$(window).on('resize',checkSize);
+
+		function checkSize(){
+			if( device.desktop() == true ) ulResize();
+		}
+
+		function ulResize(){
+			var wh = window.innerHeight ,
+				headerHeight = $('.header').innerHeight() ,
+				forLi = wh - headerHeight;
+
+			$('.level__item').css('height',forLi/2);
+		}

@@ -1,0 +1,103 @@
+@charset "UTF-8";
+@import "_common.scss";
+
+.shLayout{
+	width: 100%;
+	padding: 0px;
+	&__wrapper{
+		width: 100%;
+	}
+}
+.section{
+	margin-bottom: 0;
+}
+.case{
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	&__item{
+		width: 25%;
+		cursor:pointer;
+		position: relative;
+		overflow: hidden;
+		&:hover .case__imgTextContainer .case__textBox,
+		&:hover .case__background{
+			opacity: 0;
+		}
+		@media screen and (max-width: $breakpoint-lg){
+			width: 33%;
+		}
+		@media screen and (max-width: 650px){
+			width: 50%;
+		}
+		@media screen and (max-width: 320px){
+			width: 100%;
+		}
+		// &:hover .case__imgTextContainer{
+		// 	background-size: 120% 120%;
+		// 	background-position: center center;
+		// }
+		@mixin item ( $items ) {
+			@for $i from 1 through $items{
+				&:nth-child(#{$i}) .case__imgTextContainer{
+					background-image: url('../images/case#{$i}.jpg');
+					background-size: 100% 100%;
+					background-repeat: no-repeat;
+					background-position: center center;
+					&--active{
+						background-size: 120% 120%;
+						background-position: center center;
+					}
+				}
+			}
+		}
+		@include item(9);
+	}
+	&__imgTextContainer{
+		width: 100%;
+		box-sizing:border-box;
+		background: rgba(0,0,0,.3);
+		display: flex;
+		justify-content: center;
+		align-items:center;
+		transition:all .5s;
+		&:after{
+			content: '';
+			display: block;
+			padding-bottom: 100%;
+		}
+		&--active{
+			background-size: 120% 120%;
+			background-position: center center;
+		}
+	}
+	&__textBox{
+		text-align: center;
+		color:white;
+		position: relative;
+		transition:all .5s;
+		z-index: 1;
+	}
+	&__title{
+		font-size: 24px;
+		margin-bottom: 20px;
+	}
+	&__background{
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		background: rgba(0,0,0,.3);
+	}
+}
+
+// @mixin grid-line ($cols) {
+//     @for $i from 1 through $cols {
+//         .col- {
+//             width: ($i / $cols) * 100%;
+//         }
+//     }
+// }
+// /****** grid  ******/
+// @include grid-line(12);

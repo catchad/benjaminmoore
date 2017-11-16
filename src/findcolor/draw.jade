@@ -1,0 +1,33 @@
+extends /jadeTemplate/_layout.jade
+
+block variables
+	- var pageTitle = "尋找顏色";
+
+block style
+	link(rel="stylesheet", href="/assets/scripts/lib/farbtastic/farbtastic.css")
+	link(rel="stylesheet", href="/assets/styles/draw.css")
+
+block body
+	main.fcLayout
+		.image
+			//- canvas.image__canvas
+			img.image__canvas(src="/assets/images/test4.jpg", alt="")
+		.ui
+			.ui__top
+				.color-info
+					.color-info__name Stonington Gray HC-170
+					.color-info__color
+					.color-info__like-btn
+					.color-info__collect-btn
+				.color-picker
+					.color-picker__title 選擇色系
+					.color-picker__wheel
+			.ui__bottom
+				.color-select
+					.color-select__title
+					.color-select__list
+					.color-select__color
+		.collection
+block script
+	script(src="/assets/scripts/lib/farbtastic/farbtastic.js")
+	script(src="/assets/scripts/draw.js")

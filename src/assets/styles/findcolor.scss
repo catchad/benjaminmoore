@@ -1,0 +1,97 @@
+@charset "UTF-8";
+@import "_common.scss";
+
+.dsLayout{
+	&__fixedImgContainer {	
+		@media screen and (max-width: $breakpoint-md ) {
+		    &::before {
+		    	content: "";
+		    	display: block;
+		    	padding-top: 0%;
+		    }
+		}
+	}
+}
+
+.space{
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	&__item{
+		width: 50%;
+		cursor:pointer;
+		position: relative;
+		overflow: hidden;
+		z-index: 1;
+		&:hover .space__imgTextContainer .space__textBox,
+		&:hover .space__background{
+			opacity: 0;
+		}
+		@media screen and (max-width: 650px){
+			width: 50%;
+		}
+		@media screen and (max-width: 320px){
+			width: 100%;
+		}
+		// &:hover .space__imgTextContainer{
+		// 	transform:scale(1.1);
+		// }
+		@mixin item ( $items ) {
+			@for $i from 1 through $items{
+				&:nth-child(#{$i}) .space__imgTextContainer{
+					background-image: url('../images/case#{$i}.jpg');
+					background-size: 100% 100%;
+					background-repeat: no-repeat;
+					background-position: center center;
+					&--active{
+						background-size: 120% 120%;
+						background-position: center center;
+					}
+				}
+			}
+		}
+		@include item(4);
+	}
+	&__imgTextContainer{
+		width: 100%;
+		height: 100%;
+		box-sizing:border-box;
+		display: flex;
+		justify-content: center;
+		align-items:center;
+		transition:all .5s;
+		&:after{
+			content: '';
+			display: block;
+			padding-bottom: 100%;
+		}
+	}
+	&__textBox{
+		text-align: center;
+		color:white;
+		position: relative;
+		transition:all .5s;
+		z-index: 1;
+	}
+	&__title{
+		font-size: 4em;
+		margin-bottom: 15px;
+	}
+	&__text{
+		font-size: 1.6em;
+	    line-height: 1.6em;
+	    letter-spacing: 0.1em;
+	    margin: 0;
+	    font-weight: 100;
+	    margin-bottom: 23px;
+	}
+	&__background{
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		background: rgba(0,0,0,.3);
+	}
+}

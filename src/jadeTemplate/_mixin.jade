@@ -11,3 +11,47 @@ mixin vTab(data)
 						each text in item.text
 							p(class="vTab__text") #{text}
 
+
+mixin level(data)
+	ul(class="level")
+		each item in data
+			li(class="level__item")
+				div(class="level__imgTextContainer")
+					img(class="level__img" src="/assets/images/#{item.url}.png")
+					div(class="level__text")
+						h3(class="level__eng") #{item.title}
+						p(class="level__chi") #{item.name}
+
+
+mixin space(data)
+	ul(class="space")
+		each item in data
+			li(class="space__item")
+				div(class="space__imgTextContainer")
+					div(class="space__textBox")
+						h2(class="space__title") #{item.title}
+						p(class="space__text") #{item.text}
+				div(class="space__background")
+
+
+mixin ideal(data)
+	ul(class="ideal")
+		each item in data
+			li(class="ideal__item")
+				div(class="ideal__imgTextContainer")
+					div(class="ideal__textBox")
+						h3(class="ideal__title") #{item.title}
+						p(class="ideal__text") #{item.text}
+				div(class="ideal__background")
+
+
+mixin case(data)
+	ul(class="case")
+		each item in data
+			li(class="case__item")
+				div(class="case__imgTextContainer")
+					div(class="case__textBox")
+						h3(class="case__title") #{item.title}
+						p(class="case__text") #{item.text}
+				div(class="case__background")
+
