@@ -209,7 +209,11 @@ $(".color-info__like-btn").on("click",function(){
 	}
 })
 
-$(".collection__opener").on("click",function(){
+$(".color-info__collect-btn").on("click",function(){
+	$(".fcLayout").toggleClass('fcLayout--collection-active');
+})
+
+$(".collection__opener, .collection__btn-close").on("click",function(){
 	$(".fcLayout").toggleClass('fcLayout--collection-active');
 })
 
@@ -255,10 +259,11 @@ function imgInit() {
 	canvas.width = imgBg.width;
 	canvas.height = imgBg.height;
 	ctx = canvas.getContext('2d');
-	drawColor(defaultColor);
+	// drawColor(defaultColor);
 }
 
 function drawColor(hex) {
+	// console.log(hex);
 	ctx.fillStyle = hex;
 	ctx.fillRect(0,0,canvas.width,canvas.height);
 	ctx.drawImage(imgWall,0,0);
