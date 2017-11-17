@@ -213,11 +213,15 @@
 		&__opener {
 			height: 100%;
 			width: 50px;
-			// background-color: #444;
+			background-color: #ebebeb;
 			display: flex;
 			justify-content: center;
 			align-items: center;
 			cursor: pointer;
+			transition: 0.2s;
+			&:hover {
+				background-color: #ddd;
+			}
 		}
 		&__icon {
 			width: 60%;
@@ -262,6 +266,7 @@
 			display: flex;
 			align-items: center;
 			margin-bottom: 15px;
+			cursor: pointer;
 			&__delete-btn {
 				width: 20px;
 				height: 20px;

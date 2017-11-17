@@ -54,7 +54,7 @@ var colorlist = (function () {
     $.ajax({
         'async': false,
         'global': false,
-        'url': "../assets/scripts/json/BenjaminMoore_ClassicColors_en-us.json",
+        'url': "../assets/scripts/json/colors.json",
         'dataType': "json",
         'success': function (data) {
             json = data;
@@ -71,6 +71,8 @@ function setDefaultColor(hex) {
 
 //選色時被觸發
 //進行搜尋並呈現結果
+var nowColor;
+var collectList = [];
 function colorPickerChange(color) {
 	$(".color-select__list").html("");
 	var searchResult = getColorRange(color);
@@ -90,6 +92,17 @@ function colorPickerChange(color) {
 		$(".color-info__name").html($(this).data('name'));
 		$(".color-select__color--selected").removeClass('color-select__color--selected');
 		$(this).addClass('color-select__color--selected');
+		nowColor = {hex:$(this).data('hex'),name:$(this).data('name')};
+
+		//確認所選顏色是否已收藏
+		var result = collectList.find(function(data){
+			return data.name == nowColor.name;
+		});
+		if(result) {
+			$(".color-info__like-btn").addClass('color-info__like-btn--liked');
+		} else {
+			$(".color-info__like-btn").removeClass('color-info__like-btn--liked');
+		}
 		drawColor($(this).data('hex'));
 	})
 	if(defaultColor==color) {
@@ -104,10 +117,10 @@ var maxDelta = 30; //最大差異值
 function getColorRange(color) {
 	var searchResult = [];
 	var center = hexToRgb(color);
-	for (var i = 0; i < colorlist.colors.length; i++) {
-		var delta = Math.pow(Math.pow(colorlist.colors[i].color[0]*255-center.r,2)+Math.pow(colorlist.colors[i].color[1]*255-center.g,2)+Math.pow(colorlist.colors[i].color[2]*255-center.b,2),0.5);
+	for (var i = 0; i < colorlist.length; i++) {
+		var delta = Math.pow(Math.pow(colorlist[i].color[0]*255-center.r,2)+Math.pow(colorlist[i].color[1]*255-center.g,2)+Math.pow(colorlist[i].color[2]*255-center.b,2),0.5);
 		if(delta <= maxDelta) {
-			searchResult.push({color:colorlist.colors[i],delta});
+			searchResult.push({color:colorlist[i],delta});
 		}
 	}
 	//照差異度做排序
@@ -136,8 +149,64 @@ function rgbToHex(r, g, b) {
     return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
 }
 
+
+
+function addToCollect(color){
+	collectList.push(color);
+	refreshCollectList();
+}
+
+function deleteFromCollect(index){
+	collectList.splice(index, 1);
+	refreshCollectList();
+}
+
+function refreshCollectList() {
+	$(".collection__list").html("");
+
+	var collectDomTemplate = "<div class='color-item' data-index={{index}} data-hex='{{hex}}' data-name='{{name}}'><div class='color-item__delete-btn'>×</div><div class='color-item__color'></div><div class='color-item__name'>{{name-text}}</div>"
+	for (var i = 0; i < collectList.length; i++) {
+		var collectDom = collectDomTemplate.replace("{{index}}",i)
+											.replace("{{hex}}",collectList[i].hex)
+											.replace("{{name}}",collectList[i].name)
+											.replace("{{name-text}}",collectList[i].name);
+		$(".collection__list").append(collectDom);
+	}
+	if($(".collection__edit-btn").hasClass('collection__edit-btn--selected')){
+		$('.color-item__delete-btn').each(function(i){
+			$(this).addClass('color-item__delete-btn--active');
+		});
+	}
+	$('.color-item__color').each(function(i){
+	    $(this).css("background-color",$(this).parent(".color-item").data("hex"));
+	});
+	$(".color-item__delete-btn").on("click",function(){
+		var index = $(this).parent(".color-item").data("index");
+		deleteFromCollect(index);
+	})
+	$(".color-item").on("click",function(){
+		$(".color-info__color").css("background-color",$(this).data('hex') );
+		$(".color-info__name").html($(this).data('name'));
+		nowColor = {hex:$(this).data('hex'),name:$(this).data('name')};
+		drawColor($(this).data('hex'));
+	})
+
+}
+
 $(".color-info__like-btn").on("click",function(){
-	$(".color-info__like-btn").toggleClass('color-info__like-btn--liked');
+	//確認所選顏色是否已收藏
+	var index = -1;
+	var result = collectList.find(function(data){
+		index++;
+		return data.name == nowColor.name;
+	});
+	if(result) {
+		$(".color-info__like-btn").removeClass('color-info__like-btn--liked');
+		deleteFromCollect(index);
+	} else {
+		$(".color-info__like-btn").addClass('color-info__like-btn--liked');
+		addToCollect(nowColor);
+	}
 })
 
 $(".collection__opener").on("click",function(){
@@ -162,14 +231,12 @@ var imgLoadCount = 0;
 var imgBg = new Image();
 imgBg.src = imgBgUrl;
 imgBg.addEventListener("load", function() {
-	// console.log("bg onload");
 	imgLoader();
 }, false);
 
 var imgWall = new Image();
 imgWall.src = imgWallUrl;
 imgWall.addEventListener("load", function() {
-	// console.log("wall onload");
 	imgLoader();
 }, false);
 
@@ -184,7 +251,6 @@ function imgLoader() {
 var canvas,ctx;
 function imgInit() {
 	// console.log("loaded");
-
 	canvas = document.getElementById("canvas");
 	canvas.width = imgBg.width;
 	canvas.height = imgBg.height;
