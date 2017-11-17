@@ -1,7 +1,9 @@
+var defaultColor = "#e5a13a";
+
 $(window).ready(function() {
 	var colorWheel = $.farbtastic($('.color-picker__wheel'));
 	colorWheel.linkTo(colorPickerChange);
-	colorWheel.setColor("#B9862B");
+	colorWheel.setColor(defaultColor);
 })
 
 
@@ -62,6 +64,11 @@ var colorlist = (function () {
 })(); 
 console.log(colorlist);
 
+
+function setDefaultColor(hex) {
+
+}
+
 //選色時被觸發
 //進行搜尋並呈現結果
 function colorPickerChange(color) {
@@ -83,7 +90,11 @@ function colorPickerChange(color) {
 		$(".color-info__name").html($(this).data('name'));
 		$(".color-select__color--selected").removeClass('color-select__color--selected');
 		$(this).addClass('color-select__color--selected');
+		drawColor($(this).data('hex'));
 	})
+	if(defaultColor==color) {
+		$('.color-select__color:first-child').click();
+	}
 
 }
 
@@ -139,3 +150,51 @@ $(".collection__edit-btn").on("click",function(){
 	     $(this).toggleClass('color-item__delete-btn--active');
 	});
 })
+
+
+
+//canvas
+var imgBgUrl = "../assets/images/living_bg.png";
+var imgWallUrl = "../assets/images/living_wall.png";
+
+var imgLoadCount = 0;
+
+var imgBg = new Image();
+imgBg.src = imgBgUrl;
+imgBg.addEventListener("load", function() {
+	// console.log("bg onload");
+	imgLoader();
+}, false);
+
+var imgWall = new Image();
+imgWall.src = imgWallUrl;
+imgWall.addEventListener("load", function() {
+	// console.log("wall onload");
+	imgLoader();
+}, false);
+
+function imgLoader() {
+	imgLoadCount++;
+	if(imgLoadCount==2) {
+		imgInit();
+	}
+}
+
+
+var canvas,ctx;
+function imgInit() {
+	// console.log("loaded");
+
+	canvas = document.getElementById("canvas");
+	canvas.width = imgBg.width;
+	canvas.height = imgBg.height;
+	ctx = canvas.getContext('2d');
+	drawColor(defaultColor);
+}
+
+function drawColor(hex) {
+	ctx.fillStyle = hex;
+	ctx.fillRect(0,0,canvas.width,canvas.height);
+	ctx.drawImage(imgWall,0,0);
+	ctx.drawImage(imgBg,0,0);
+}
