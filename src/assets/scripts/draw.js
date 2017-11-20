@@ -1,9 +1,11 @@
-var defaultColor = "#e5a13a";
+var defaultColor = "#e5a039";
 
+
+var colorPicker;
 $(window).ready(function() {
-	var colorWheel = $.farbtastic($('.color-picker__wheel'));
-	colorWheel.linkTo(colorPickerChange);
-	colorWheel.setColor(defaultColor);
+	colorPicker = new ColorPicker(Color(defaultColor).toHsv());
+	// console.log(colorPicker);
+	colorPicker.setColor();
 })
 
 
@@ -22,32 +24,130 @@ function canvasResize() {
     }
 }
 
+//color picker
+var ColorPicker = function(defaultColor) {
+	var _this = this;
+	defaultColor = defaultColor || {h:0,s:0,v:0};
+	// console.log(defaultColor);
+	var h = defaultColor.h;
+	var s = defaultColor.s;
+	var v = defaultColor.v;
+	// // changeSV(h);
+	// setColor(h,s,v);
 
-//fake colorlist
-// var colorlist = [];
-// var rgbChange = 10;
-// for (var r = 0; r < 256; r = r + parseInt(255/rgbChange)) {
-// 	for (var g = 0; g < 256; g = g + parseInt(255/rgbChange)) {
-// 		for (var b = 0; b < 256; b = b + parseInt(255/rgbChange)) {
-// 			var rHex = r.toString(16);
-// 			if(rHex.length<2) {
-// 				rHex = "0" + rHex;
-// 			}
-// 			var gHex = g.toString(16);
-// 			if(gHex.length<2) {
-// 				gHex = "0" + gHex;
-// 			}
-// 			var bHex = b.toString(16);
-// 			if(bHex.length<2) {
-// 				bHex = "0" + bHex;
-// 			}
-// 			var hex = "#" + rHex + gHex + bHex;
-// 			var name = hex;
-// 			colorlist.push({hex,name,r,g,b});
-// 		}
-// 	}
-// }
-// console.log(colorlist);
+	var isSelectSV = false;
+	$(".sv").on("mousedown",function(event){
+		isSelectSV = true;
+		var x = event.pageX - $(".sv").offset().left;
+		var y = event.pageY - $(".sv").offset().top;
+		// changePickerSV(x,y);
+		s = (x*100)/$(".sv").outerWidth();
+		v = (($(".sv").outerHeight()-y)*100)/$(".sv").outerHeight();
+		_this.setColor({h,s,v});
+	})
+
+	var isSelectH = false;
+	$(".h").on("mousedown",function(event){
+		isSelectH = true;
+		var x = event.pageX - ($(".h").offset().left+$(".h").outerWidth()/2);
+		var y = event.pageY - ($(".h").offset().top+$(".h").outerHeight()/2);
+		h = Math.atan2(y, x) * 180 / Math.PI;
+		h = h>=0?h:h+360;
+		// changePickerH(h);
+		// changeSV(h);
+		_this.setColor({h,s,v});
+	})
+
+	$("body").on("mousemove", function(event) {
+		if(isSelectSV) {
+			var x = event.pageX - $(".sv").offset().left;
+			var y = event.pageY - $(".sv").offset().top;
+			//修正滑鼠在選擇器外面時的坐標
+			if(x < 0) x = 0;
+			if(y < 0) y = 0;
+			if(x >= $(".sv").outerWidth()) x = $(".sv").outerWidth()-1;
+			if(y >= $(".sv").outerHeight()) y = $(".sv").outerHeight()-1;
+			// changePickerSV(x,y);
+			s = (x*100)/$(".sv").outerWidth();
+			v = (($(".sv").outerHeight()-y)*100)/$(".sv").outerHeight();
+			_this.setColor({h,s,v});
+		}
+		if(isSelectH) {
+			var x = event.pageX - ($(".h").offset().left+$(".h").outerWidth()/2);
+			var y = event.pageY - ($(".h").offset().top+$(".h").outerHeight()/2);
+			h = Math.atan2(y, x) * 180 / Math.PI;
+			h = h>=0?h:h+360;
+			// changePickerH(h);
+			_this.setColor({h,s,v});
+		}
+	})
+
+	$("body").on("mouseup", function(event) {
+		//結束選取顏色
+		isSelectSV = false;
+		isSelectH = false;
+	})
+
+
+	//sv換色
+	function changeSV(h) {
+		var hsv = Color( {h:h,s:100,v:100} );
+		$(".sv").css("background-color",hsv.toString());
+		$(".h__picker").css("background-color",hsv.toString());
+	}
+
+	this.setColor = function(hsv) {
+		hsv = hsv || {h:defaultColor.h,s:defaultColor.s,v:defaultColor.v};
+		var hex = Color(hsv).toString();
+
+		//畫面變動
+		changeSV(hsv.h);
+		$(".h__picker-container").css("transform","rotate("+hsv.h+"deg)");
+		var x = hsv.s*$(".sv").outerWidth()/100;
+		var y = $(".sv").outerHeight() - hsv.v*$(".sv").outerHeight()/100;
+		$(".sv__picker").css("top",y);
+		$(".sv__picker").css("left",x);
+
+		colorPickerChange(hex);
+
+	}
+
+	//mobile touch
+	// var ht = new Hammer($("body")[0]);
+	// ht.on('pan', function(ev) {
+	// 	ev.preventDefault();
+	// 	if(isSelectSV) {
+	// 		var x = ev.center.x - $(".sv").offset().left;
+	// 		var y = ev.center.y - $(".sv").offset().top;
+	// 		//修正滑鼠在選擇器外面時的坐標
+	// 		if(x < 0) x = 0;
+	// 		if(y < 0) y = 0;
+	// 		if(x >= $(".sv").outerWidth()) x = $(".sv").outerWidth()-1;
+	// 		if(y >= $(".sv").outerHeight()) y = $(".sv").outerHeight()-1;
+	// 		$(".sv__picker").css("top",y);
+	// 		$(".sv__picker").css("left",x);
+	// 		s = (x*100)/$(".sv").outerWidth();
+	// 		v = (($(".sv").outerHeight()-y)*100)/$(".sv").outerHeight();
+	// 		getColor(h,s,v);
+	// 	}
+	// 	if(isSelectH) {
+	// 		var x = ev.center.x - ($(".h").offset().left+$(".h").outerWidth()/2);
+	// 		var y = ev.center.y - ($(".h").offset().top+$(".h").outerHeight()/2);
+	// 		h = Math.atan2(y, x) * 180 / Math.PI;
+	// 		h = h>=0?h:h+360;
+	// 		$(".h__picker-container").css("transform","rotate("+h+"deg)");
+	// 		changeSV(h);
+	// 		getColor(h,s,v);
+	// 	}
+	// });
+	// ht.on('panend', function(ev) {
+	// 	//結束選取顏色
+	// 	isSelectSV = false;
+	// 	isSelectH = false;
+	// });
+}
+
+
 
 var colorlist = (function () {
     var json = null;
@@ -62,12 +162,7 @@ var colorlist = (function () {
     });
     return json;
 })(); 
-console.log(colorlist);
-
-
-function setDefaultColor(hex) {
-
-}
+// console.log(colorlist);
 
 //選色時被觸發
 //進行搜尋並呈現結果
@@ -189,6 +284,7 @@ function refreshCollectList() {
 		$(".color-info__name").html($(this).data('name'));
 		nowColor = {hex:$(this).data('hex'),name:$(this).data('name')};
 		drawColor($(this).data('hex'));
+		colorPicker.setColor(Color($(this).data('hex')).toHsv());
 	})
 
 }

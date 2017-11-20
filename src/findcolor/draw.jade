@@ -4,7 +4,7 @@ block variables
 	- var pageTitle = "尋找顏色";
 
 block style
-	link(rel="stylesheet", href="/assets/scripts/lib/farbtastic/farbtastic.css")
+	//- link(rel="stylesheet", href="/assets/scripts/lib/farbtastic/farbtastic.css")
 	link(rel="stylesheet", href="/assets/styles/draw.css")
 
 block body
@@ -23,6 +23,13 @@ block body
 				.color-picker
 					.color-picker__title 選擇色系
 					.color-picker__wheel
+						.h
+							//- img(src="/assets/images/hsv_wheel.png", alt="")
+							.h__picker-container
+								.h__picker
+						.sv
+							//- img(src="/assets/images/hsv_mask.png", alt="")
+							.sv__picker
 			.ui__bottom
 				.color-select
 					.color-select__title 選擇產品顏色
@@ -48,5 +55,6 @@ block body
 
 		//- input#color-picker
 block script
-	script(src="/assets/scripts/lib/farbtastic/farbtastic.js")
+	script(src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js")
+	script(src="/assets/scripts/lib/color.min.js")
 	script(src="/assets/scripts/draw.js")
