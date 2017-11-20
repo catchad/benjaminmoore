@@ -16,11 +16,50 @@
 }
 .section{
 	&:first-child{
-		margin-top: 160px;
+		margin-top: 50px;
+		margin-bottom: 0;
 	}
 	@media screen and (max-width: $breakpoint-md){
 		&:first-child{
 			margin-top: 0px;
 		}
+	}
+}
+.information{
+	li{
+		&:nth-child(3){
+			margin-bottom: 30px;
+		}
+		&:nth-child(4){
+			margin-bottom: 10px;
+		}
+		&:nth-child(4),
+		&:nth-child(5){
+			cursor:pointer;
+		}
+	}
+	&__icon.fa-map-marker{
+		font-size: 30px;
+		margin-left: 15px;
+		@media screen and (max-width: 813px){
+			font-size: 24px;
+			margin-left: 9px;
+		}
+		@media screen and (max-width: 790px){
+			margin-left: 1px;
+		}
+		@media screen and (max-width: $breakpoint-md){
+			font-size: 24px;
+			margin-left: 10px;
+		}
+	}
+	&__icon.fa-facebook-official,
+	&__icon.fa-instagram{
+		font-size: 40px;
+		vertical-align: middle;
+		margin-right: 10px;
+	}
+	&__link{
+		vertical-align: middle;
 	}
 }

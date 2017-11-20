@@ -28,8 +28,19 @@
 	&__eng{
 		margin-bottom: 10px;
 	}
+	&__sticker{
+		position: absolute;
+	    top: 20px;
+	    left: 20px;
+	    padding: 10px 15px 10px 15px;
+	    border: 1px solid #C4C4C4;
+	    letter-spacing: 3px;
+	    color:#A1A1A1;
+	    transition:.3s;
+	}
 	&__item{
 		width: 25%;
+		position: relative;
 		text-align: center;
 		background-color: #EFEFEF;
 		cursor:pointer;
@@ -40,6 +51,9 @@
 			transform: scale(1.4, 1.4) translateY(20px);
 		}
 		&:hover .level__text{
+			opacity: 0;
+		}
+		&:hover .level__sticker{
 			opacity: 0;
 		}
 		&:nth-child(8n+2),
