@@ -26,16 +26,12 @@
 	}
 }
 .information{
-	li{
+	&__text{
 		&:nth-child(3){
 			margin-bottom: 30px;
 		}
 		&:nth-child(4){
 			margin-bottom: 10px;
-		}
-		&:nth-child(4),
-		&:nth-child(5){
-			cursor:pointer;
 		}
 	}
 	&__icon.fa-map-marker{
@@ -59,7 +55,14 @@
 		vertical-align: middle;
 		margin-right: 10px;
 	}
+	&__alone{
+		display: inline-block;
+		width: 8%;
+	}
 	&__link{
+		display: block;
+	}
+	&__fanspage{
 		vertical-align: middle;
 	}
 }
