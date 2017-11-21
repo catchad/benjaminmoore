@@ -13,10 +13,12 @@
 }
 .ideal{
 	width: 100%;
+	height: calc(100vh - 60px);
 	display: flex;
 	flex-wrap: wrap;
 	&__item{
 		width: 25%;
+		height: 50%;
 		cursor:pointer;
 		position: relative;
 		overflow: hidden;
@@ -60,6 +62,7 @@
 		justify-content: center;
 		align-items:center;
 		transition:all .5s;
+		height: 100%;
 		&:after{
 			content: '';
 			display: block;
