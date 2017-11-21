@@ -33,23 +33,7 @@ block body
 block script
 	script(src="//cdnjs.cloudflare.com/ajax/libs/device.js/0.2.7/device.min.js")
 	script.
-		if( device.desktop() == true ) ulResize();
-
-		$(window).on('resize',checkSize);
-
-		function checkSize(){
-			if( device.desktop() == true ) ulResize();
-		}
-
-		function ulResize(){
-			var wh = window.innerHeight ,
-				headerHeight = $('.header').innerHeight() ,
-				forLi = wh - headerHeight;
-
-			$('.case__item').css('height',forLi/2);
-		}
-
-		$('.case__item').hover(function(){
+		$('.case__link').hover(function(){
 			$(this).children('.case__imgTextContainer').addClass('case__imgTextContainer--active');
 		},function(){
 			$(this).children('.case__imgTextContainer').removeClass('case__imgTextContainer--active');

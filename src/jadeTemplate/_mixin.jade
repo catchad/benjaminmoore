@@ -16,12 +16,13 @@ mixin level(data)
 	ul(class="level")
 		each item in data
 			li(class="level__item")
-				div(class="level__sticker")  #{item.sticker}
-				div(class="level__imgTextContainer")
-					img(class="level__img" src="/assets/images/#{item.url}.png")
-					div(class="level__text")
-						h3(class="level__eng") #{item.title}
-						p(class="level__chi") #{item.name}
+				a(class="level__link" href="#")
+					div(class="level__sticker")  #{item.sticker}
+					div(class="level__imgTextContainer")
+						img(class="level__img" src="/assets/images/#{item.url}.png")
+						div(class="level__text")
+							h3(class="level__eng") #{item.title}
+							p(class="level__chi") #{item.name}
 
 					
 
@@ -30,31 +31,45 @@ mixin space(data)
 	ul(class="space")
 		each item in data
 			li(class="space__item")
-				div(class="space__imgTextContainer")
-					div(class="space__textBox")
-						h2(class="space__title") #{item.title}
-						p(class="space__text") #{item.text}
-				div(class="space__background")
+				a(class="space__link" href="#")
+					div(class="space__imgTextContainer")
+						div(class="space__textBox")
+							h2(class="space__title") #{item.title}
+							p(class="space__text") #{item.text}
+					div(class="space__background")
 
 
 mixin ideal(data)
 	ul(class="ideal")
 		each item in data
 			li(class="ideal__item")
-				div(class="ideal__imgTextContainer")
-					div(class="ideal__textBox")
-						h3(class="ideal__title") #{item.title}
-						p(class="ideal__text") #{item.text}
-				div(class="ideal__background") 
+				a(class="ideal__link" href="#")
+					div(class="ideal__imgTextContainer")
+						div(class="ideal__textBox")
+							h3(class="ideal__title") #{item.title}
+							p(class="ideal__text") #{item.text}
+					div(class="ideal__background") 
 
 
 mixin case(data)
 	ul(class="case")
 		each item in data
 			li(class="case__item")
-				div(class="case__imgTextContainer")
-					div(class="case__textBox")
-						h3(class="case__title") #{item.title}
-						p(class="case__text") #{item.text}
-				div(class="case__background")
+				a(class="case__link" href="/inspiration/page1")
+					div(class="case__imgTextContainer")
+						div(class="case__textBox")
+							h3(class="case__title") #{item.title}
+							p(class="case__text") #{item.text}
+					div(class="case__background")
 
+
+mixin news(data)
+	ul(class="news")
+		each item in data
+			li(class="news__item")
+				a(class="news__link" href="#")
+					div(class="news__imgTextContainer")
+						div(class="news__textBox")
+							h3(class="news__title") #{item.title}
+							p(class="news__text") #{item.text}
+					div(class="news__background")
