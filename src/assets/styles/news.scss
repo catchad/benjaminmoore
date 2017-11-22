@@ -29,6 +29,9 @@
 		&:hover .news__background{
 			opacity: 0;
 		}
+		&:hover .news__imgTextContainer{
+			background-size: 120% 120%;
+		}
 		@media screen and (max-width: $breakpoint-lg){
 			width: 33%;
 		}
@@ -38,10 +41,10 @@
 		@media screen and (max-width: 320px){
 			width: 100%;
 		}
-		// &:hover .news__imgTextContainer{
-		// 	background-size: 120% 120%;
-		// 	background-position: center center;
-		// }
+		&:hover .news__imgTextContainer{
+			background-size: 120% 120%;
+			background-position: center center;
+		}
 		@mixin item ( $items ) {
 			@for $i from 1 through $items{
 				&:nth-child(#{$i}) .news__imgTextContainer{
@@ -49,10 +52,10 @@
 					background-size: 100% 100%;
 					background-repeat: no-repeat;
 					background-position: center center;
-					&--active{
-						background-size: 120% 120%;
-						background-position: center center;
-					}
+					
+				}
+				&:nth-child(#{$i}):hover .news__imgTextContainer{
+					background-size: 120% 120%;
 				}
 			}
 		}
@@ -67,6 +70,7 @@
 		justify-content: center;
 		align-items:center;
 		transition:all .5s;
+
 		&:after{
 			content: '';
 			display: block;

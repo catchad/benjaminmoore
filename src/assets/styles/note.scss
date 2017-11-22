@@ -1,0 +1,55 @@
+@charset "UTF-8";
+@import "_common.scss";
+
+
+.dsLayout{
+	left: 50%;
+	&__fixedImgContainer{
+		left: 0%;
+	}
+	@media screen and (max-width: $breakpoint-md){
+		left: 0%;	
+		&__fixedImgContainer{
+			left: 50%;
+		}
+	}
+}
+.section{
+	&:first-child{
+		margin-top: 50px;
+		margin-bottom: 0;
+	}
+	@media screen and (max-width: $breakpoint-md){
+		&:first-child{
+			margin-top: 0px;
+		}
+	}
+	&__text{
+		&:nth-of-type(2){
+			text-align: right;
+		}
+	}
+	&__imgbox{
+		width: 100%;
+		margin: 2em 0;
+	}
+	&__img{
+		width: 100%;
+	}
+	&__back{
+		position: fixed;
+		top: 100px;
+		right: 50px;
+		text-align: justify;
+	    font-size: 1em;
+	    line-height: 1.8em;
+	    letter-spacing: 0.1em;
+		&:after{
+			content: '\21c0';
+			display: inline-block;
+		}
+		@media screen and (max-width: $breakpoint-xl){
+			display: none;
+		}
+	}
+}
