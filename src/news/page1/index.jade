@@ -1,0 +1,30 @@
+extends /jadeTemplate/_layout.jade
+
+block variables
+	- var pageTitle = "最新消息";
+
+block style
+	link(rel="stylesheet", href="/assets/styles/note.css")
+
+block body
+	main.dsLayout
+		div.dsLayout__wrapper
+			section.section
+				div.dsLayout__fixedImgContainer.dsLayout__fixedImgContainer--active
+					img.dsLayout__fixedImg(src="/assets/images/pow-wow2.jpg", alt="")
+				div.title
+					p.title__description 2017.11.30
+					p.title__name POW WOW 
+				p.section__text 在我們剛剛進入台灣的這些日子，有幸剛好碰到國際藝術組織POW WOW，聽完他們的理念我們決定加入贊助的行列，運用我們油漆鮮豔多變的色彩\以及無毒低氣味的特性，不僅讓作畫輕鬆也讓環境更清新，也讓台北增加更深刻的藝術文化。
+				p.section__text POW! -是揣摩藝術與人產生的碰撞，感覺就像一記拳頭打在臉上。
+				p.section__text WOW! -是觀者對藝術的反應，形容當下產生的敬畏與驚嘆。
+				p.section__text POW! WOW! -一詞來自美國原住民，形容一場慶祝文化、音樂與藝術的盛會。
+				div.section__imgbox
+					img.section__img(src="/assets/images/pow-wow1.jpg", alt="")
+				p.section__text POW! WOW! 街頭藝術活動主要是由全球知名的藝術家組成的國際藝術組織，在夏威夷已歷經七屆的舉辦，是當代藝術家的年度集會。以壁畫彩繪為主軸，其目標在於以藝術與音樂創作提升民眾對新世代街頭藝術的認知，運用創意與文化的相互激盪來創造一個「新世代街頭藝術」。歷屆的活動，幸得來自當地政府、大學、創作領域、產業界的支持，獲得了社會各界民眾的共鳴與參與，讓我們看到並相信街頭的藝術創作為社區所帶來的變化。
+				div.section__imgbox
+					img.section__img(src="/assets/images/pow-wow3.jpg", alt="")
+				p.section__text 2014年首次在臺北舉辦的POW! WOW! Taiwan街頭藝術活動，邀請了來自美國、英國、澳洲與香港的國際藝術家與台灣在地藝術家一同參與。匯集來自世界告地的創意，在一週內，呈現台灣更豐盛多元的藝術與音樂樣貌，並藉由國際社群媒體鼓勵台灣在地藝術家創作，也希望能拓展在地觀眾的藝術觀點，支持台灣的文化輸出成長。
+				a.section__back(href="/news/") 最新消息
+
+block script

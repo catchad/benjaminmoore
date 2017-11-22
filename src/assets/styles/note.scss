@@ -24,10 +24,15 @@
 			margin-top: 0px;
 		}
 	}
-	&__text{
-		&:nth-of-type(2){
-			text-align: right;
-		}
+	&__designer{
+		font-size: 1em;
+		line-height: 1.8em;
+		letter-spacing: 0.1em;
+		text-align: right;
+		margin: 2em 0;
+	    @media screen and (max-width: $breakpoint-md ) {
+		    font-size: 0.9em;
+	    }
 	}
 	&__imgbox{
 		width: 100%;
