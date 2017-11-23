@@ -58,29 +58,29 @@ var ColorPicker = function(defaultColor) {
 		_this.setColor({h,s,v});
 	})
 
-	$("body").on("mousemove", function(event) {
-		if(isSelectSV) {
-			var x = event.pageX - $(".sv").offset().left;
-			var y = event.pageY - $(".sv").offset().top;
-			//修正滑鼠在選擇器外面時的坐標
-			if(x < 0) x = 0;
-			if(y < 0) y = 0;
-			if(x >= $(".sv").outerWidth()) x = $(".sv").outerWidth()-1;
-			if(y >= $(".sv").outerHeight()) y = $(".sv").outerHeight()-1;
-			// changePickerSV(x,y);
-			s = (x*100)/$(".sv").outerWidth();
-			v = (($(".sv").outerHeight()-y)*100)/$(".sv").outerHeight();
-			_this.setColor({h,s,v});
-		}
-		if(isSelectH) {
-			var x = event.pageX - ($(".h").offset().left+$(".h").outerWidth()/2);
-			var y = event.pageY - ($(".h").offset().top+$(".h").outerHeight()/2);
-			h = Math.atan2(y, x) * 180 / Math.PI;
-			h = h>=0?h:h+360;
-			// changePickerH(h);
-			_this.setColor({h,s,v});
-		}
-	})
+	// $("body").on("mousemove", function(event) {
+	// 	if(isSelectSV) {
+	// 		var x = event.pageX - $(".sv").offset().left;
+	// 		var y = event.pageY - $(".sv").offset().top;
+	// 		//修正滑鼠在選擇器外面時的坐標
+	// 		if(x < 0) x = 0;
+	// 		if(y < 0) y = 0;
+	// 		if(x >= $(".sv").outerWidth()) x = $(".sv").outerWidth()-1;
+	// 		if(y >= $(".sv").outerHeight()) y = $(".sv").outerHeight()-1;
+	// 		// changePickerSV(x,y);
+	// 		s = (x*100)/$(".sv").outerWidth();
+	// 		v = (($(".sv").outerHeight()-y)*100)/$(".sv").outerHeight();
+	// 		_this.setColor({h,s,v});
+	// 	}
+	// 	if(isSelectH) {
+	// 		var x = event.pageX - ($(".h").offset().left+$(".h").outerWidth()/2);
+	// 		var y = event.pageY - ($(".h").offset().top+$(".h").outerHeight()/2);
+	// 		h = Math.atan2(y, x) * 180 / Math.PI;
+	// 		h = h>=0?h:h+360;
+	// 		// changePickerH(h);
+	// 		_this.setColor({h,s,v});
+	// 	}
+	// })
 
 	$("body").on("mouseup", function(event) {
 		//結束選取顏色
@@ -112,39 +112,72 @@ var ColorPicker = function(defaultColor) {
 
 	}
 
-	//mobile touch
-	// var ht = new Hammer($("body")[0]);
-	// ht.on('pan', function(ev) {
-	// 	ev.preventDefault();
-	// 	if(isSelectSV) {
-	// 		var x = ev.center.x - $(".sv").offset().left;
-	// 		var y = ev.center.y - $(".sv").offset().top;
-	// 		//修正滑鼠在選擇器外面時的坐標
-	// 		if(x < 0) x = 0;
-	// 		if(y < 0) y = 0;
-	// 		if(x >= $(".sv").outerWidth()) x = $(".sv").outerWidth()-1;
-	// 		if(y >= $(".sv").outerHeight()) y = $(".sv").outerHeight()-1;
-	// 		$(".sv__picker").css("top",y);
-	// 		$(".sv__picker").css("left",x);
-	// 		s = (x*100)/$(".sv").outerWidth();
-	// 		v = (($(".sv").outerHeight()-y)*100)/$(".sv").outerHeight();
-	// 		getColor(h,s,v);
-	// 	}
-	// 	if(isSelectH) {
-	// 		var x = ev.center.x - ($(".h").offset().left+$(".h").outerWidth()/2);
-	// 		var y = ev.center.y - ($(".h").offset().top+$(".h").outerHeight()/2);
-	// 		h = Math.atan2(y, x) * 180 / Math.PI;
-	// 		h = h>=0?h:h+360;
-	// 		$(".h__picker-container").css("transform","rotate("+h+"deg)");
-	// 		changeSV(h);
-	// 		getColor(h,s,v);
-	// 	}
+	// mobile touch
+	var htSV = new Hammer($(".sv")[0]);
+
+	htSV.on("panstart", function(ev){
+		isSelectSV = true;
+		ev.preventDefault();
+		var x = ev.center.x - $(".sv").offset().left;
+		var y = ev.center.y + document.body.scrollTop - $(".sv").offset().top;
+		s = (x*100)/$(".sv").outerWidth();
+		v = (($(".sv").outerHeight()-y)*100)/$(".sv").outerHeight();
+		_this.setColor({h,s,v});
+	})
+	var htH = new Hammer($(".h")[0]);
+
+	htH.on("panstart", function(ev){
+		isSelectH = true;
+		ev.preventDefault();
+		var x = ev.center.x - ($(".h").offset().left+$(".h").outerWidth()/2);
+		var y = ev.center.y + document.body.scrollTop - ($(".h").offset().top+$(".h").outerHeight()/2);
+		h = Math.atan2(y, x) * 180 / Math.PI;
+		h = h>=0?h:h+360;
+		_this.setColor({h,s,v});
+	})
+
+
+	var ht = new Hammer($("body")[0]);
+	// ht.on('', function(ev) {
+	// 	console.log("start");
+	// 	// isSelectSV = true;
+	// 	// isSelectH = true;
 	// });
-	// ht.on('panend', function(ev) {
-	// 	//結束選取顏色
-	// 	isSelectSV = false;
-	// 	isSelectH = false;
-	// });
+	ht.on('panstart panmove', function(ev) {
+		// console.log(ev.center.y - document.body.scrollTop);
+		// ev.preventDefault();
+		if(isSelectSV) {
+			ev.preventDefault();
+			var x = ev.center.x - $(".sv").offset().left;
+			var y = ev.center.y + window.pageYOffset - $(".sv").offset().top;
+			//修正滑鼠在選擇器外面時的坐標
+			if(x < 0) x = 0;
+			if(y < 0) y = 0;
+			if(x >= $(".sv").outerWidth()) x = $(".sv").outerWidth()-1;
+			if(y >= $(".sv").outerHeight()) y = $(".sv").outerHeight()-1;
+			// changePickerSV(x,y);
+			console.log(x);
+			console.log(y);
+			s = (x*100)/$(".sv").outerWidth();
+			v = (($(".sv").outerHeight()-y)*100)/$(".sv").outerHeight();
+			_this.setColor({h,s,v});
+		}
+		if(isSelectH) {
+			ev.preventDefault();
+			var x = ev.center.x - ($(".h").offset().left+$(".h").outerWidth()/2);
+			var y = ev.center.y + window.pageYOffset - ($(".h").offset().top+$(".h").outerHeight()/2);
+			h = Math.atan2(y, x) * 180 / Math.PI;
+			h = h>=0?h:h+360;
+			// changePickerH(h);
+			_this.setColor({h,s,v});
+		}
+	});
+	ht.on('panend', function(ev) {
+		//結束選取顏色
+		console.log("end");
+		isSelectSV = false;
+		isSelectH = false;
+	});
 }
 
 
