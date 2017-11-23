@@ -49,6 +49,9 @@
 					background-size: 100% 100%;
 					background-repeat: no-repeat;
 					background-position: center center;
+					@media screen and (max-width: $breakpoint-xl){
+						background-size: cover;
+					}
 				}
 				&:nth-child(#{$i}):hover .case__imgTextContainer{
 					background-size: 120% 120%;
@@ -82,6 +85,11 @@
 		position: relative;
 		transition:all .5s;
 		z-index: 1;
+	}
+	&__text{
+		@media screen and (max-width: $breakpoint-md){
+			font-size: 12px;
+		}
 	}
 	&__title{
 		font-size: 24px;

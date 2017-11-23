@@ -49,6 +49,9 @@
 					background-size: 100% 100%;
 					background-repeat: no-repeat;
 					background-position: center center;
+					@media screen and (max-width: $breakpoint-xl){
+						background-size: cover;
+					}
 				}
 				&:nth-child(#{$i}):hover .ideal__imgTextContainer{
 					background-size: 120% 120%;
@@ -81,6 +84,11 @@
 	&__title{
 		font-size: 24px;
 		margin-bottom: 20px;
+	}
+	&__text{
+		@media screen and (max-width: $breakpoint-md){
+			font-size: 12px;
+		}
 	}
 	&__background{
 		width: 100%;
