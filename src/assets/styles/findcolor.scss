@@ -44,10 +44,9 @@
 					background-size: 100% 100%;
 					background-repeat: no-repeat;
 					background-position: center center;
-					&--active{
-						background-size: 120% 120%;
-						background-position: center center;
-					}
+				}
+				&:nth-child(#{$i}):hover .space__imgTextContainer{
+					background-size: 120% 120%;
 				}
 			}
 		}

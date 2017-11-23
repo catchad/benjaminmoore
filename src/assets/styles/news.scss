@@ -45,10 +45,19 @@
 			background-size: 120% 120%;
 			background-position: center center;
 		}
+		&:nth-child(1) .news__imgTextContainer{
+			background-image: url('../images/pow-wow1.jpg');
+			background-size: 100% 100%;
+			background-repeat: no-repeat;
+			background-position: center center;
+		}
+		&:nth-child(1):hover .news__imgTextContainer{
+				background-size: 120% 120%;
+			}
 		@mixin item ( $items ) {
-			@for $i from 1 through $items{
+			@for $i from 2 through $items{
 				&:nth-child(#{$i}) .news__imgTextContainer{
-					background-image: url('../images/case#{$i}.jpg');
+					background-image: url('../images/show#{$i}.jpg');
 					background-size: 100% 100%;
 					background-repeat: no-repeat;
 					background-position: center center;

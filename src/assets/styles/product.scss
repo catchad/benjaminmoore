@@ -20,19 +20,25 @@
 		position: relative;
 		@media screen and (max-width: $breakpoint-md){
 			height:calc(100% - 30px);
+			box-sizing:border-box;
+			padding-top: 15px;
 		}
 	}
 	&__img{
 		transition:.5s;
 		@media screen and (max-width: $breakpoint-md){
-			height:70%;
+			height:60%;
 		}
 	}
 	&__text{
 		box-sizing:border-box;
-		margin: 20px 0px;
+		width: 90%;
+		margin: 20px auto;
 		transition:.3s;
 		color:#323232;
+		@media screen and (max-width: $breakpoint-md){
+			margin: 10px auto;
+		}
 	}
 	&__eng{
 		margin-bottom: 10px;
