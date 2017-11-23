@@ -90,7 +90,8 @@
 		// align-items:center;
 		// flex-wrap:wrap;
 		&:hover .level__img{
-			transform: scale(1.4, 1.4) translateY(20px);
+			// transform: scale(1.4, 1.4) translateY(20px);
+			max-width: 240px;
 		}
 		&:hover .level__text{
 			opacity: 0;
