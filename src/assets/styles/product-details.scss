@@ -1,0 +1,48 @@
+@charset "UTF-8";
+@import "_common.scss";
+
+.dsLayout{
+	&__fixedImgContainer{
+		background-color: #EFEFEF;
+	}
+	&__fixedImg{
+		width: auto;
+		@media screen and (max-width: $breakpoint-sm){	
+			height: 90%;
+		}
+		&--heightFirst{
+			height: auto;
+		}
+	}
+}
+
+.section:first-child{
+	margin-top: 100px ;
+	@media screen and (max-width: $breakpoint-sm){
+		margin-top: 0;
+	}
+}
+
+.section {
+	&__text{
+		margin: 10px 0;
+		&:nth-of-type(1){
+			margin-top: 2em;
+		}
+	}
+}
+.details{
+	width: 100%;
+    margin: 1em 0;
+    &__item{
+    	display: flex;
+    	margin-top: 10px;
+    	font-size: 1em;
+    	line-height: 1.6em;
+    	&:before{
+    		content: '．';
+    		display: block;
+    		margin-right: 5px
+    	}
+    }
+}
