@@ -31,26 +31,4 @@ block body
 			//- 				p.spcae__text
 			//- 		div.space__background
 block script
-	script(src="//cdnjs.cloudflare.com/ajax/libs/device.js/0.2.7/device.min.js")
-	script.
-		if( device.desktop() == true ) ulResize();
 
-		$(window).on('resize',checkSize);
-
-		function checkSize(){
-			if( device.desktop() == true ) ulResize();
-		}
-
-		function ulResize(){
-			var wh = window.innerHeight ,
-				headerHeight = $('.header').innerHeight() ,
-				forLi = wh - headerHeight;
-
-			$('.space__item').css('height',forLi/2);
-		}
-
-		$('.space__item').hover(function(){
-			$(this).children('.space__imgTextContainer').addClass('space__imgTextContainer--active');
-		},function(){
-			$(this).children('.space__imgTextContainer').removeClass('space__imgTextContainer--active');
-		})

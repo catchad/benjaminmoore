@@ -3,30 +3,31 @@ extends /jadeTemplate/_layout.jade
 block variables
 	- var pageTitle = "最新消息";
 
+block style
+	link(rel="stylesheet", href="/assets/styles/news.css")
+
 block body
-	main.dsLayout
-		.dsLayout__wrapper
-			section.section
-				.dsLayout__fixedImgContainer
-					img.dsLayout__fixedImg(src="http://fakeimg.pl/1920x1080/")
-				.title
-					p.title__name 大標題
-					p.title__description 敘述
-				.section__text 文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字
-				.section__heading 標題
-				.section__text 文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字
-				.section__heading 標題
-				.section__text 文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字
-				.section__heading 標題
-				.section__text 文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字
-				.section__heading 標題
-				.section__text 文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字
-				.section__heading 標題
-				.section__text 文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字文字
-
-	
+	main.shLayout
+	div.shLayout__wrapper
+		section.section
+			+news([
+				{title:"POW WOW",text:"假字假字假字假字假字假字"},
+				{title:"最新消息2",text:"假字假字假字假字假字假字"},
+				{title:"最新消息3",text:"假字假字假字假字假字假字"},
+				{title:"最新消息4",text:"假字假字假字假字假字假字"},
+				{title:"最新消息5",text:"假字假字假字假字假字假字"},
+				{title:"最新消息6",text:"假字假字假字假字假字假字"},
+				{title:"最新消息7",text:"假字假字假字假字假字假字"},
+				{title:"最新消息8",text:"假字假字假字假字假字假字"}
+			])
 
 
+			//- ul.news
+			//- 	li.news__item
+			//- 		div.news__imgTextContainer
+			//- 			div.news__textBox
+			//- 				h2.news__tittle
+			//- 				p.news__text
 
 
 block script

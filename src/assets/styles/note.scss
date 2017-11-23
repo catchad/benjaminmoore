@@ -1,0 +1,60 @@
+@charset "UTF-8";
+@import "_common.scss";
+
+
+.dsLayout{
+	left: 50%;
+	&__fixedImgContainer{
+		left: 0%;
+	}
+	@media screen and (max-width: $breakpoint-md){
+		left: 0%;	
+		&__fixedImgContainer{
+			left: 50%;
+		}
+	}
+}
+.section{
+	&:first-child{
+		margin-top: 50px;
+		margin-bottom: 0;
+	}
+	@media screen and (max-width: $breakpoint-md){
+		&:first-child{
+			margin-top: 0px;
+		}
+	}
+	&__designer{
+		font-size: 1em;
+		line-height: 1.8em;
+		letter-spacing: 0.1em;
+		text-align: right;
+		margin: 2em 0;
+	    @media screen and (max-width: $breakpoint-md ) {
+		    font-size: 0.9em;
+	    }
+	}
+	&__imgbox{
+		width: 100%;
+		margin: 2em 0;
+	}
+	&__img{
+		width: 100%;
+	}
+	&__back{
+		position: fixed;
+		top: 100px;
+		right: 50px;
+		text-align: justify;
+	    font-size: 1em;
+	    line-height: 1.8em;
+	    letter-spacing: 0.1em;
+		&:after{
+			content: '\21c0';
+			display: inline-block;
+		}
+		@media screen and (max-width: $breakpoint-xl){
+			display: none;
+		}
+	}
+}

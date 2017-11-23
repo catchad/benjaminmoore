@@ -12,18 +12,33 @@
 }
 .level{
 	width: 100%;
+	height:calc(100vh - 60px);
 	display: flex;
 	flex-wrap: wrap;
 	&__imgTextContainer{
 		width: 100%;
+		position: relative;
+		@media screen and (max-width: $breakpoint-md){
+			height:calc(100% - 30px);
+			box-sizing:border-box;
+			padding-top: 15px;
+		}
 	}
 	&__img{
 		transition:.5s;
+		@media screen and (max-width: $breakpoint-md){
+			height:60%;
+		}
 	}
 	&__text{
 		box-sizing:border-box;
-		margin: 20px 0px;
+		width: 90%;
+		margin: 20px auto;
 		transition:.3s;
+		color:#323232;
+		@media screen and (max-width: $breakpoint-md){
+			margin: 10px auto;
+		}
 	}
 	&__eng{
 		margin-bottom: 10px;
@@ -33,20 +48,44 @@
 	    top: 20px;
 	    left: 20px;
 	    padding: 10px 15px 10px 15px;
-	    border: 1px solid #C4C4C4;
+	    border: 0.1em solid #878787;
+	    box-sizing:border-box;
 	    letter-spacing: 3px;
-	    color:#A1A1A1;
+	    color:#878787;
 	    transition:.3s;
+	    // margin-right: auto;
+	    // margin-left: 35px;
+	    // box-sizing: border-box;
+	    // padding: 10px 15px 10px 15px;
+	    // border: 1px solid #CCC;
+	    // letter-spacing: 3px;
+	    @media screen and (max-width: $breakpoint-xl){
+	    	position: static;
+	    	margin-right: auto;
+	    	margin-top: 5px;
+	    	margin-left: 5px;
+	    	padding: 5px 10px 5px 10px;
+	    	font-size: 12px;
+	    }
 	}
-	&__item{
-		width: 25%;
-		position: relative;
-		text-align: center;
-		background-color: #EFEFEF;
-		cursor:pointer;
+	&__link{
+		width: 100%;
+		height: 100%;
 		display: flex;
 		justify-content:center;
 		align-items:center;
+		flex-wrap:wrap;
+	}
+	&__item{
+		width: 25%;
+		height:50%;
+		position: relative;
+		text-align: center;
+		background-color: #EFEFEF;
+		// display: flex;
+		// justify-content:center;
+		// align-items:center;
+		// flex-wrap:wrap;
 		&:hover .level__img{
 			transform: scale(1.4, 1.4) translateY(20px);
 		}

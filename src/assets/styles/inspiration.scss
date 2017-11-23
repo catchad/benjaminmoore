@@ -13,11 +13,16 @@
 }
 .ideal{
 	width: 100%;
+	height: calc(100vh - 60px);
 	display: flex;
 	flex-wrap: wrap;
+	&__link{
+		width: 100%;
+		height: 100%;
+	}
 	&__item{
 		width: 25%;
-		cursor:pointer;
+		height: 50%;
 		position: relative;
 		overflow: hidden;
 		z-index: 1;
@@ -44,10 +49,9 @@
 					background-size: 100% 100%;
 					background-repeat: no-repeat;
 					background-position: center center;
-					&--active{
-						background-size: 120% 120%;
-						background-position: center center;
-					}
+				}
+				&:nth-child(#{$i}):hover .ideal__imgTextContainer{
+					background-size: 120% 120%;
 				}
 			}
 		}
@@ -60,6 +64,7 @@
 		justify-content: center;
 		align-items:center;
 		transition:all .5s;
+		height: 100%;
 		&:after{
 			content: '';
 			display: block;

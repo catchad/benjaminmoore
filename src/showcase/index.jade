@@ -11,15 +11,14 @@ block body
 	div.shLayout__wrapper
 		section.section
 			+case([
-				{title:"台北松山",text:"假字假字假字假字假字假字"},
-				{title:"台北內湖",text:"假字假字假字假字假字假字"},
-				{title:"台北中山",text:"假字假字假字假字假字假字"},
-				{title:"台北五股",text:"假字假字假字假字假字假字"},
-				{title:"台北信義",text:"假字假字假字假字假字假字"},
-				{title:"台北三重",text:"假字假字假字假字假字假字"},
-				{title:"台北蘆洲",text:"假字假字假字假字假字假字"},
-				{title:"台北板橋",text:"假字假字假字假字假字假字"},
-				{title:"台北新莊",text:"假字假字假字假字假字假字"}
+				{title:"新竹寶山",text:"假字假字假字假字假字假字"},
+				{title:"案例分享2",text:"假字假字假字假字假字假字"},
+				{title:"案例分享3",text:"假字假字假字假字假字假字"},
+				{title:"案例分享4",text:"假字假字假字假字假字假字"},
+				{title:"案例分享5",text:"假字假字假字假字假字假字"},
+				{title:"案例分享6",text:"假字假字假字假字假字假字"},
+				{title:"案例分享7",text:"假字假字假字假字假字假字"},
+				{title:"案例分享8",text:"假字假字假字假字假字假字"}
 			])
 
 
@@ -31,26 +30,4 @@ block body
 			//- 				p.case__text
 
 block script
-	script(src="//cdnjs.cloudflare.com/ajax/libs/device.js/0.2.7/device.min.js")
-	script.
-		if( device.desktop() == true ) ulResize();
 
-		$(window).on('resize',checkSize);
-
-		function checkSize(){
-			if( device.desktop() == true ) ulResize();
-		}
-
-		function ulResize(){
-			var wh = window.innerHeight ,
-				headerHeight = $('.header').innerHeight() ,
-				forLi = wh - headerHeight;
-
-			$('.case__item').css('height',forLi/2);
-		}
-
-		$('.case__item').hover(function(){
-			$(this).children('.case__imgTextContainer').addClass('case__imgTextContainer--active');
-		},function(){
-			$(this).children('.case__imgTextContainer').removeClass('case__imgTextContainer--active');
-		})

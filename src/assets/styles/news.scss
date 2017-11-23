@@ -11,7 +11,7 @@
 .section{
 	margin-bottom: 0;
 }
-.case{
+.news{
 	width: 100%;
 	display: flex;
 	flex-wrap: wrap;
@@ -25,9 +25,12 @@
 		height:50%;
 		position: relative;
 		overflow: hidden;
-		&:hover .case__imgTextContainer .case__textBox,
-		&:hover .case__background{
+		&:hover .news__imgTextContainer .news__textBox,
+		&:hover .news__background{
 			opacity: 0;
+		}
+		&:hover .news__imgTextContainer{
+			background-size: 120% 120%;
 		}
 		@media screen and (max-width: $breakpoint-lg){
 			width: 33%;
@@ -38,19 +41,29 @@
 		@media screen and (max-width: 320px){
 			width: 100%;
 		}
-		// &:hover .case__imgTextContainer{
-		// 	background-size: 120% 120%;
-		// 	background-position: center center;
-		// }
+		&:hover .news__imgTextContainer{
+			background-size: 120% 120%;
+			background-position: center center;
+		}
+		&:nth-child(1) .news__imgTextContainer{
+			background-image: url('../images/pow-wow1.jpg');
+			background-size: 100% 100%;
+			background-repeat: no-repeat;
+			background-position: center center;
+		}
+		&:nth-child(1):hover .news__imgTextContainer{
+				background-size: 120% 120%;
+			}
 		@mixin item ( $items ) {
-			@for $i from 1 through $items{
-				&:nth-child(#{$i}) .case__imgTextContainer{
+			@for $i from 2 through $items{
+				&:nth-child(#{$i}) .news__imgTextContainer{
 					background-image: url('../images/show#{$i}.jpg');
 					background-size: 100% 100%;
 					background-repeat: no-repeat;
 					background-position: center center;
+					
 				}
-				&:nth-child(#{$i}):hover .case__imgTextContainer{
+				&:nth-child(#{$i}):hover .news__imgTextContainer{
 					background-size: 120% 120%;
 				}
 			}
@@ -66,6 +79,7 @@
 		justify-content: center;
 		align-items:center;
 		transition:all .5s;
+
 		&:after{
 			content: '';
 			display: block;
