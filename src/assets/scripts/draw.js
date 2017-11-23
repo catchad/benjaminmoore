@@ -7,11 +7,12 @@ if( collectList == null ) {
 refreshCollectList();
 
 
-
-var defaultColor = "#e5a039";
+var defaultColorList = ["#454b51","#6d6c6e","#e5a039","#c2d2ca"];
+var defaultColor;
+var isFirstDraw = true;
 var colorPicker;
 
-//依網址後參數設定並讀取圖片
+//依網址後參數設定canvas並讀取圖片
 var picIndex = 0;
 var imgLoadCount = 0;
 var imgBgUrl = "../assets/images/pic{{index}}_bg.png";
@@ -29,6 +30,7 @@ function setPicUrl(){
 		picIndex = 1;
 	}
 	console.log(picIndex);
+	defaultColor = defaultColorList[picIndex-1];
 }
 imgBgUrl = imgBgUrl.replace("{{index}}",picIndex);
 imgWallUrl = imgWallUrl.replace("{{index}}",picIndex);
@@ -282,8 +284,9 @@ function colorPickerChange(color) {
 		console.log($(this).data('hex'));
 		drawColor($(this).data('hex'));
 	})
-	if(defaultColor==color) {
+	if(isFirstDraw) {
 		// console.log($('.color-select__color:first-child'));
+		isFirstDraw = false;
 		$('.color-select__color:first-child').click();
 	}
 
@@ -366,6 +369,7 @@ function refreshCollectList() {
 	$(".color-item").on("click",function(){
 		$(".color-info__color").css("background-color",$(this).data('hex') );
 		$(".color-info__name").html($(this).data('name'));
+		$(".color-info__like-btn").addClass('color-info__like-btn--liked');
 		nowColor = {hex:$(this).data('hex'),name:$(this).data('name')};
 		drawColor($(this).data('hex'));
 		colorPicker.setColor(Color($(this).data('hex')).toHsv());
