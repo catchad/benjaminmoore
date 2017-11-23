@@ -4,21 +4,39 @@
 .dsLayout{
 	&__fixedImgContainer{
 		background-color: #EFEFEF;
+		@media screen and (max-width: $breakpoint-md){
+			text-align: center;
+			box-sizing:border-box;
+			padding:20px 0;
+		}
+		&:before{
+			@media screen and (max-width: $breakpoint-md){
+				padding-top: 0%;
+			}
+		}
 	}
 	&__fixedImg{
-		width: auto;
-		@media screen and (max-width: $breakpoint-sm){	
-			height: 90%;
+		width: 100%;
+		max-width: 400px;
+		@media screen and (max-width: $breakpoint-lg){
+			width: 70%;
+		}
+		@media screen and (max-width: $breakpoint-md){
+			width: 40%;
 		}
 		&--heightFirst{
 			height: auto;
+		}
+		@media screen and (max-width: $breakpoint-md){
+			position: static;
+			transform:translate(0,0);
 		}
 	}
 }
 
 .section:first-child{
 	margin-top: 100px ;
-	@media screen and (max-width: $breakpoint-sm){
+	@media screen and (max-width: $breakpoint-md){
 		margin-top: 0;
 	}
 }

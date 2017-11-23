@@ -25,9 +25,12 @@
 		}
 	}
 	&__img{
+		max-width: 170px;
+    	width: 100%;
 		transition:.5s;
-		@media screen and (max-width: $breakpoint-md){
+		@media screen and (max-width: $breakpoint-sm){
 			height:60%;
+			max-width: 140px;
 		}
 	}
 	&__text{
