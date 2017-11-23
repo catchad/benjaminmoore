@@ -55,7 +55,7 @@
 		width: calc(100% - 400px);
 		flex: 0 0 auto;
 		height: 100%;
-		background-color: #333;
+		// background-color: #333;
 		overflow: hidden;
 		&__canvas {
 			position: absolute;
@@ -166,6 +166,7 @@
 					position: relative;
 					width: 160px;
 					height: 160px;
+					cursor: crosshair;
 					.h {
 						position: absolute;
 						width: 100%;
@@ -239,11 +240,24 @@
 			padding: 50px 40px 30px 40px;
 			.color-select {
 				height: 100%;
+				@media screen and (max-width: $breakpoint-md ) {
+					&::after {
+						content: "";
+						width: 50px;
+						height: 100%;
+						position: absolute;
+						top: 0;
+						right: 40px;
+						background: linear-gradient(to right, rgba(#f9f9f9,0), rgba(#f9f9f9,1));
+					}
+				}
+				
 				&__title {
 					margin-bottom: 20px;
 					font-size: 1.2em;
 				}
 				&__list {
+					position: relative;
 					width: 100%;
 					height: 100%;
 					padding-bottom: 20px;

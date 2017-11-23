@@ -1,17 +1,81 @@
+//讀取本機儲存的顏色收藏
+var collectList = localStorage.getItem("collectList");
+collectList = JSON.parse(collectList);
+if( collectList == null ) {
+  collectList = [];
+}
+refreshCollectList();
+
+
+
 var defaultColor = "#e5a039";
-
-
 var colorPicker;
-$(window).ready(function() {
+
+//依網址後參數設定並讀取圖片
+var picIndex = 0;
+var imgLoadCount = 0;
+var imgBgUrl = "../assets/images/pic{{index}}_bg.png";
+var imgWallUrl = "../assets/images/pic{{index}}_mask.png";
+setPicUrl();
+function setPicUrl(){
+	if(window.location.href.indexOf('?') != -1) {
+		var hash = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+		if(hash>=1 && hash<=4) {
+			picIndex = hash[0];
+		} else {
+			picIndex = 1;
+		}
+	} else {
+		picIndex = 1;
+	}
+	console.log(picIndex);
+}
+imgBgUrl = imgBgUrl.replace("{{index}}",picIndex);
+imgWallUrl = imgWallUrl.replace("{{index}}",picIndex);
+
+var imgBg = new Image();
+imgBg.src = imgBgUrl;
+imgBg.addEventListener("load", function() {
+	imgLoader();
+}, false);
+
+var imgWall = new Image();
+imgWall.src = imgWallUrl;
+imgWall.addEventListener("load", function() {
+	imgLoader();
+}, false);
+
+function imgLoader() {
+	imgLoadCount++;
+	if(imgLoadCount==2) {
+		imgInit();
+	}
+}
+
+var canvas,ctx;
+function imgInit() {
+	console.log("loaded");
+	canvas = document.getElementById("canvas");
+	canvas.width = imgBg.width;
+	canvas.height = imgBg.height;
+	ctx = canvas.getContext('2d');
+	canvasResize();
+	drawColor(defaultColor);
+
 	colorPicker = new ColorPicker(Color(defaultColor).toHsv());
-	// console.log(colorPicker);
 	colorPicker.setColor();
-})
+}
 
+//canvas上色
+function drawColor(hex) {
+	ctx.fillStyle = hex;
+	ctx.fillRect(0,0,canvas.width,canvas.height);
+	ctx.drawImage(imgWall,0,0);
+	ctx.drawImage(imgBg,0,0);
+}
 
+//canvas auto cover
 $(window).resize(canvasResize);
-canvasResize();
-
 function canvasResize() {
 	var containerSize = {
 	    w: $(".image").width(),
@@ -28,19 +92,15 @@ function canvasResize() {
 var ColorPicker = function(defaultColor) {
 	var _this = this;
 	defaultColor = defaultColor || {h:0,s:0,v:0};
-	// console.log(defaultColor);
 	var h = defaultColor.h;
 	var s = defaultColor.s;
 	var v = defaultColor.v;
-	// // changeSV(h);
-	// setColor(h,s,v);
 
 	var isSelectSV = false;
 	$(".sv").on("mousedown",function(event){
 		isSelectSV = true;
 		var x = event.pageX - $(".sv").offset().left;
 		var y = event.pageY - $(".sv").offset().top;
-		// changePickerSV(x,y);
 		s = (x*100)/$(".sv").outerWidth();
 		v = (($(".sv").outerHeight()-y)*100)/$(".sv").outerHeight();
 		_this.setColor({h,s,v});
@@ -53,8 +113,6 @@ var ColorPicker = function(defaultColor) {
 		var y = event.pageY - ($(".h").offset().top+$(".h").outerHeight()/2);
 		h = Math.atan2(y, x) * 180 / Math.PI;
 		h = h>=0?h:h+360;
-		// changePickerH(h);
-		// changeSV(h);
 		_this.setColor({h,s,v});
 	})
 
@@ -88,7 +146,6 @@ var ColorPicker = function(defaultColor) {
 		isSelectH = false;
 	})
 
-
 	//sv換色
 	function changeSV(h) {
 		var hsv = Color( {h:h,s:100,v:100} );
@@ -99,6 +156,10 @@ var ColorPicker = function(defaultColor) {
 	this.setColor = function(hsv) {
 		hsv = hsv || {h:defaultColor.h,s:defaultColor.s,v:defaultColor.v};
 		var hex = Color(hsv).toString();
+
+		h = hsv.h;
+		s = hsv.s;
+		v = hsv.v;
 
 		//畫面變動
 		changeSV(hsv.h);
@@ -138,14 +199,7 @@ var ColorPicker = function(defaultColor) {
 
 
 	var ht = new Hammer($("body")[0]);
-	// ht.on('', function(ev) {
-	// 	console.log("start");
-	// 	// isSelectSV = true;
-	// 	// isSelectH = true;
-	// });
 	ht.on('panstart panmove', function(ev) {
-		// console.log(ev.center.y - document.body.scrollTop);
-		// ev.preventDefault();
 		if(isSelectSV) {
 			ev.preventDefault();
 			var x = ev.center.x - $(".sv").offset().left;
@@ -155,9 +209,6 @@ var ColorPicker = function(defaultColor) {
 			if(y < 0) y = 0;
 			if(x >= $(".sv").outerWidth()) x = $(".sv").outerWidth()-1;
 			if(y >= $(".sv").outerHeight()) y = $(".sv").outerHeight()-1;
-			// changePickerSV(x,y);
-			console.log(x);
-			console.log(y);
 			s = (x*100)/$(".sv").outerWidth();
 			v = (($(".sv").outerHeight()-y)*100)/$(".sv").outerHeight();
 			_this.setColor({h,s,v});
@@ -168,7 +219,6 @@ var ColorPicker = function(defaultColor) {
 			var y = ev.center.y + window.pageYOffset - ($(".h").offset().top+$(".h").outerHeight()/2);
 			h = Math.atan2(y, x) * 180 / Math.PI;
 			h = h>=0?h:h+360;
-			// changePickerH(h);
 			_this.setColor({h,s,v});
 		}
 	});
@@ -195,12 +245,10 @@ var colorlist = (function () {
     });
     return json;
 })(); 
-// console.log(colorlist);
 
 //選色時被觸發
 //進行搜尋並呈現結果
 var nowColor;
-var collectList = [];
 function colorPickerChange(color) {
 	$(".color-select__list").html("");
 	var searchResult = getColorRange(color);
@@ -231,9 +279,11 @@ function colorPickerChange(color) {
 		} else {
 			$(".color-info__like-btn").removeClass('color-info__like-btn--liked');
 		}
+		console.log($(this).data('hex'));
 		drawColor($(this).data('hex'));
 	})
 	if(defaultColor==color) {
+		// console.log($('.color-select__color:first-child'));
 		$('.color-select__color:first-child').click();
 	}
 
@@ -290,6 +340,7 @@ function deleteFromCollect(index){
 }
 
 function refreshCollectList() {
+	localStorage.setItem("collectList", JSON.stringify(collectList));
 	$(".collection__list").html("");
 
 	var collectDomTemplate = "<div class='color-item' data-index={{index}} data-hex='{{hex}}' data-name='{{name}}'><div class='color-item__delete-btn'>×</div><div class='color-item__color'></div><div class='color-item__name'>{{name-text}}</div>"
@@ -352,49 +403,3 @@ $(".collection__edit-btn").on("click",function(){
 	     $(this).toggleClass('color-item__delete-btn--active');
 	});
 })
-
-
-
-//canvas
-var imgBgUrl = "../assets/images/living_bg.png";
-var imgWallUrl = "../assets/images/living_wall.png";
-
-var imgLoadCount = 0;
-
-var imgBg = new Image();
-imgBg.src = imgBgUrl;
-imgBg.addEventListener("load", function() {
-	imgLoader();
-}, false);
-
-var imgWall = new Image();
-imgWall.src = imgWallUrl;
-imgWall.addEventListener("load", function() {
-	imgLoader();
-}, false);
-
-function imgLoader() {
-	imgLoadCount++;
-	if(imgLoadCount==2) {
-		imgInit();
-	}
-}
-
-
-var canvas,ctx;
-function imgInit() {
-	// console.log("loaded");
-	canvas = document.getElementById("canvas");
-	canvas.width = imgBg.width;
-	canvas.height = imgBg.height;
-	ctx = canvas.getContext('2d');
-	// drawColor(defaultColor);
-}
-
-function drawColor(hex) {
-	// console.log(hex);
-	ctx.fillStyle = hex;
-	ctx.fillRect(0,0,canvas.width,canvas.height);
-	ctx.drawImage(imgWall,0,0);
-	ctx.drawImage(imgBg,0,0);
-}
