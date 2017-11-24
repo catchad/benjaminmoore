@@ -1,3 +1,6 @@
+// IE array.find polyfill
+Array.prototype.find||Object.defineProperty(Array.prototype,"find",{value:function(r){if(null==this)throw new TypeError('"this" is null or not defined');var t=Object(this),e=t.length>>>0;if("function"!=typeof r)throw new TypeError("predicate must be a function");for(var n=arguments[1],o=0;o<e;){var i=t[o];if(r.call(n,i,o,t))return i;o++}}});
+
 //讀取本機儲存的顏色收藏
 var collectList = localStorage.getItem("collectList");
 collectList = JSON.parse(collectList);
@@ -6,10 +9,12 @@ if( collectList == null ) {
 }
 refreshCollectList();
 
-
+//4個房間的預設色彩
 var defaultColorList = ["#454b51","#6d6c6e","#e5a039","#c2d2ca"];
 var defaultColor;
+
 var isFirstDraw = true;
+
 var colorPicker;
 
 //依網址後參數設定canvas並讀取圖片
@@ -29,12 +34,14 @@ function setPicUrl(){
 	} else {
 		picIndex = 1;
 	}
-	console.log(picIndex);
+	//設定預設顏色
 	defaultColor = defaultColorList[picIndex-1];
 }
+//設定圖片路徑
 imgBgUrl = imgBgUrl.replace("{{index}}",picIndex);
 imgWallUrl = imgWallUrl.replace("{{index}}",picIndex);
 
+//載入圖片
 var imgBg = new Image();
 imgBg.src = imgBgUrl;
 imgBg.addEventListener("load", function() {
@@ -54,6 +61,7 @@ function imgLoader() {
 	}
 }
 
+//圖片載入完畢，設定canvas
 var canvas,ctx;
 function imgInit() {
 	console.log("loaded");
@@ -64,8 +72,10 @@ function imgInit() {
 	canvasResize();
 	drawColor(defaultColor);
 
-	colorPicker = new ColorPicker(Color(defaultColor).toHsv());
-	colorPicker.setColor();
+	//創造選色器
+	colorPicker = new ColorPicker();
+	//使選色器設定為預設顏色
+	colorPicker.setColor(Color(defaultColor).toHsv());
 }
 
 //canvas上色
@@ -76,7 +86,7 @@ function drawColor(hex) {
 	ctx.drawImage(imgBg,0,0);
 }
 
-//canvas auto cover
+//canvas 自動resize
 $(window).resize(canvasResize);
 function canvasResize() {
 	var containerSize = {
@@ -90,62 +100,50 @@ function canvasResize() {
     }
 }
 
-//color picker
-var ColorPicker = function(defaultColor) {
-	var _this = this;
-	defaultColor = defaultColor || {h:0,s:0,v:0};
-	var h = defaultColor.h;
-	var s = defaultColor.s;
-	var v = defaultColor.v;
 
-	var isSelectSV = false;
+//color picker
+var ColorPicker = function() {
+	var _this = this;
+	var h,s,v;
+
 	$(".sv").on("mousedown",function(event){
-		isSelectSV = true;
 		var x = event.pageX - $(".sv").offset().left;
 		var y = event.pageY - $(".sv").offset().top;
 		s = (x*100)/$(".sv").outerWidth();
 		v = (($(".sv").outerHeight()-y)*100)/$(".sv").outerHeight();
-		_this.setColor({h,s,v});
+		_this.setColor({h:h,s:s,v:v});
 	})
 
-	var isSelectH = false;
 	$(".h").on("mousedown",function(event){
-		isSelectH = true;
 		var x = event.pageX - ($(".h").offset().left+$(".h").outerWidth()/2);
 		var y = event.pageY - ($(".h").offset().top+$(".h").outerHeight()/2);
 		h = Math.atan2(y, x) * 180 / Math.PI;
 		h = h>=0?h:h+360;
-		_this.setColor({h,s,v});
+		_this.setColor({h:h,s:s,v:v});
 	})
 
-	// $("body").on("mousemove", function(event) {
-	// 	if(isSelectSV) {
-	// 		var x = event.pageX - $(".sv").offset().left;
-	// 		var y = event.pageY - $(".sv").offset().top;
-	// 		//修正滑鼠在選擇器外面時的坐標
-	// 		if(x < 0) x = 0;
-	// 		if(y < 0) y = 0;
-	// 		if(x >= $(".sv").outerWidth()) x = $(".sv").outerWidth()-1;
-	// 		if(y >= $(".sv").outerHeight()) y = $(".sv").outerHeight()-1;
-	// 		// changePickerSV(x,y);
-	// 		s = (x*100)/$(".sv").outerWidth();
-	// 		v = (($(".sv").outerHeight()-y)*100)/$(".sv").outerHeight();
-	// 		_this.setColor({h,s,v});
-	// 	}
-	// 	if(isSelectH) {
-	// 		var x = event.pageX - ($(".h").offset().left+$(".h").outerWidth()/2);
-	// 		var y = event.pageY - ($(".h").offset().top+$(".h").outerHeight()/2);
-	// 		h = Math.atan2(y, x) * 180 / Math.PI;
-	// 		h = h>=0?h:h+360;
-	// 		// changePickerH(h);
-	// 		_this.setColor({h,s,v});
-	// 	}
-	// })
-
-	$("body").on("mouseup", function(event) {
-		//結束選取顏色
-		isSelectSV = false;
-		isSelectH = false;
+	var htSV = new Hammer($(".sv")[0]);
+	htSV.on("panstart panmove", function(ev){
+		ev.preventDefault();
+		var x = ev.center.x - $(".sv").offset().left;
+		var y = ev.center.y + window.pageYOffset - $(".sv").offset().top;
+		//修正滑鼠在選擇器外面時的坐標
+		if(x < 0) x = 0;
+		if(y < 0) y = 0;
+		if(x >= $(".sv").outerWidth()) x = $(".sv").outerWidth()-1;
+		if(y >= $(".sv").outerHeight()) y = $(".sv").outerHeight()-1;
+		s = (x*100)/$(".sv").outerWidth();
+		v = (($(".sv").outerHeight()-y)*100)/$(".sv").outerHeight();
+		_this.setColor({h:h,s:s,v:v});
+	})
+	var htH = new Hammer($(".h")[0]);
+	htH.on("panstart panmove", function(ev){
+		ev.preventDefault();
+		var x = ev.center.x - ($(".h").offset().left+$(".h").outerWidth()/2);
+		var y = ev.center.y + window.pageYOffset - ($(".h").offset().top+$(".h").outerHeight()/2);
+		h = Math.atan2(y, x) * 180 / Math.PI;
+		h = h>=0?h:h+360;
+		_this.setColor({h:h,s:s,v:v});
 	})
 
 	//sv換色
@@ -155,8 +153,8 @@ var ColorPicker = function(defaultColor) {
 		$(".h__picker").css("background-color",hsv.toString());
 	}
 
+	//hsv : {h,s,v}
 	this.setColor = function(hsv) {
-		hsv = hsv || {h:defaultColor.h,s:defaultColor.s,v:defaultColor.v};
 		var hex = Color(hsv).toString();
 
 		h = hsv.h;
@@ -171,69 +169,13 @@ var ColorPicker = function(defaultColor) {
 		$(".sv__picker").css("top",y);
 		$(".sv__picker").css("left",x);
 
+		//callback
 		colorPickerChange(hex);
-
 	}
-
-	// mobile touch
-	var htSV = new Hammer($(".sv")[0]);
-
-	htSV.on("panstart", function(ev){
-		isSelectSV = true;
-		ev.preventDefault();
-		var x = ev.center.x - $(".sv").offset().left;
-		var y = ev.center.y + document.body.scrollTop - $(".sv").offset().top;
-		s = (x*100)/$(".sv").outerWidth();
-		v = (($(".sv").outerHeight()-y)*100)/$(".sv").outerHeight();
-		_this.setColor({h,s,v});
-	})
-	var htH = new Hammer($(".h")[0]);
-
-	htH.on("panstart", function(ev){
-		isSelectH = true;
-		ev.preventDefault();
-		var x = ev.center.x - ($(".h").offset().left+$(".h").outerWidth()/2);
-		var y = ev.center.y + document.body.scrollTop - ($(".h").offset().top+$(".h").outerHeight()/2);
-		h = Math.atan2(y, x) * 180 / Math.PI;
-		h = h>=0?h:h+360;
-		_this.setColor({h,s,v});
-	})
-
-
-	var ht = new Hammer($("body")[0]);
-	ht.on('panstart panmove', function(ev) {
-		if(isSelectSV) {
-			ev.preventDefault();
-			var x = ev.center.x - $(".sv").offset().left;
-			var y = ev.center.y + window.pageYOffset - $(".sv").offset().top;
-			//修正滑鼠在選擇器外面時的坐標
-			if(x < 0) x = 0;
-			if(y < 0) y = 0;
-			if(x >= $(".sv").outerWidth()) x = $(".sv").outerWidth()-1;
-			if(y >= $(".sv").outerHeight()) y = $(".sv").outerHeight()-1;
-			s = (x*100)/$(".sv").outerWidth();
-			v = (($(".sv").outerHeight()-y)*100)/$(".sv").outerHeight();
-			_this.setColor({h,s,v});
-		}
-		if(isSelectH) {
-			ev.preventDefault();
-			var x = ev.center.x - ($(".h").offset().left+$(".h").outerWidth()/2);
-			var y = ev.center.y + window.pageYOffset - ($(".h").offset().top+$(".h").outerHeight()/2);
-			h = Math.atan2(y, x) * 180 / Math.PI;
-			h = h>=0?h:h+360;
-			_this.setColor({h,s,v});
-		}
-	});
-	ht.on('panend', function(ev) {
-		//結束選取顏色
-		console.log("end");
-		isSelectSV = false;
-		isSelectH = false;
-	});
 }
 
 
-
+//載入油漆色票
 var colorlist = (function () {
     var json = null;
     $.ajax({
@@ -248,13 +190,16 @@ var colorlist = (function () {
     return json;
 })(); 
 
-//選色時被觸發
-//進行搜尋並呈現結果
+//選色時被觸發，進行搜尋並呈現結果
 var nowColor;
 function colorPickerChange(color) {
+	//清空搜尋結果
 	$(".color-select__list").html("");
+	//進行搜尋
 	var searchResult = getColorRange(color);
-	var colorDomTemplate = "<div data-hex='{{hex}}' data-name='{{name}}' class='color-select__color'></div>"
+
+	//依照搜尋結果生成結果並放入與填色
+	var colorDomTemplate = "<div data-hex='{{hex}}' data-name='{{name}}' class='color-select__color'></div>";
 	for (var i = 0; i < searchResult.length; i++) {
 		var rgb = [parseInt(searchResult[i].color.color[0]*255),parseInt(searchResult[i].color.color[1]*255),parseInt(searchResult[i].color.color[2]*255)]
 		var hex = rgbToHex(rgb[0],rgb[1],rgb[2]);
@@ -265,6 +210,8 @@ function colorPickerChange(color) {
 	$('.color-select__color').each(function(i){
 	     $(this).css("background-color",$(this).data('hex'));
 	});
+
+	//點擊事件綁定，進行換色
 	$('.color-select__color').on("click", function(){
 		$(".color-info__color").css("background-color",$(this).data('hex') );
 		$(".color-info__name").html($(this).data('name'));
@@ -272,7 +219,7 @@ function colorPickerChange(color) {
 		$(this).addClass('color-select__color--selected');
 		nowColor = {hex:$(this).data('hex'),name:$(this).data('name')};
 
-		//確認所選顏色是否已收藏
+		//確認所選顏色是否已收藏，切換收藏按鈕狀態
 		var result = collectList.find(function(data){
 			return data.name == nowColor.name;
 		});
@@ -281,11 +228,13 @@ function colorPickerChange(color) {
 		} else {
 			$(".color-info__like-btn").removeClass('color-info__like-btn--liked');
 		}
-		console.log($(this).data('hex'));
+
+		//著色
 		drawColor($(this).data('hex'));
 	})
+
+	//初始化自動填入預設色彩
 	if(isFirstDraw) {
-		// console.log($('.color-select__color:first-child'));
 		isFirstDraw = false;
 		$('.color-select__color:first-child').click();
 	}
@@ -293,7 +242,8 @@ function colorPickerChange(color) {
 }
 
 
-//獲得搜尋結果
+//依指定色碼，從油漆色票中進行搜尋
+//具體方式是在三維空間以(r,g,b)作為座標計算兩者距離，越近表示越相似
 var maxDelta = 30; //最大差異值
 function getColorRange(color) {
 	var searchResult = [];
@@ -301,7 +251,7 @@ function getColorRange(color) {
 	for (var i = 0; i < colorlist.length; i++) {
 		var delta = Math.pow(Math.pow(colorlist[i].color[0]*255-center.r,2)+Math.pow(colorlist[i].color[1]*255-center.g,2)+Math.pow(colorlist[i].color[2]*255-center.b,2),0.5);
 		if(delta <= maxDelta) {
-			searchResult.push({color:colorlist[i],delta});
+			searchResult.push({color:colorlist[i],delta:delta});
 		}
 	}
 	//照差異度做排序
@@ -309,9 +259,9 @@ function getColorRange(color) {
 	  return a.delta - b.delta;
 	});
 	return searchResult;
-
 }
 
+//色彩編碼轉換
 function hexToRgb(hex) {
     var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     return result ? {
@@ -320,32 +270,23 @@ function hexToRgb(hex) {
         b: parseInt(result[3], 16)
     } : null;
 }
-
 function componentToHex(c) {
     var hex = c.toString(16);
     return hex.length == 1 ? "0" + hex : hex;
 }
-
 function rgbToHex(r, g, b) {
     return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
 }
 
 
-
-function addToCollect(color){
-	collectList.push(color);
-	refreshCollectList();
-}
-
-function deleteFromCollect(index){
-	collectList.splice(index, 1);
-	refreshCollectList();
-}
-
+//收藏清單與介面更新
 function refreshCollectList() {
+	//將現在的清單送入本機儲存
 	localStorage.setItem("collectList", JSON.stringify(collectList));
+	//介面清空
 	$(".collection__list").html("");
 
+	//生成清單元素並放入介面與填色
 	var collectDomTemplate = "<div class='color-item' data-index={{index}} data-hex='{{hex}}' data-name='{{name}}'><div class='color-item__delete-btn'>×</div><div class='color-item__color'></div><div class='color-item__name'>{{name-text}}</div>"
 	for (var i = 0; i < collectList.length; i++) {
 		var collectDom = collectDomTemplate.replace("{{index}}",i)
@@ -354,18 +295,24 @@ function refreshCollectList() {
 											.replace("{{name-text}}",collectList[i].name);
 		$(".collection__list").append(collectDom);
 	}
+	$('.color-item__color').each(function(i){
+	    $(this).css("background-color",$(this).parent(".color-item").data("hex"));
+	});
+
+	//如果編輯按鈕啟動中則顯示刪除按鈕，反之則隱藏
 	if($(".collection__edit-btn").hasClass('collection__edit-btn--selected')){
 		$('.color-item__delete-btn').each(function(i){
 			$(this).addClass('color-item__delete-btn--active');
 		});
 	}
-	$('.color-item__color').each(function(i){
-	    $(this).css("background-color",$(this).parent(".color-item").data("hex"));
-	});
+
+	//按下刪除按鈕則刪除該元素
 	$(".color-item__delete-btn").on("click",function(){
 		var index = $(this).parent(".color-item").data("index");
 		deleteFromCollect(index);
 	})
+
+	//按下元素本身，則依元素中的資料進行填色
 	$(".color-item").on("click",function(){
 		$(".color-info__color").css("background-color",$(this).data('hex') );
 		$(".color-info__name").html($(this).data('name'));
@@ -374,11 +321,14 @@ function refreshCollectList() {
 		drawColor($(this).data('hex'));
 		colorPicker.setColor(Color($(this).data('hex')).toHsv());
 	})
-
 }
 
+
+//收藏按鈕
 $(".color-info__like-btn").on("click",function(){
-	//確認所選顏色是否已收藏
+	//確認所選顏色是否已在收藏清單
+	//若沒有，點擊後加入收藏清單
+	//若有，點擊後自收藏清單刪除
 	var index = -1;
 	var result = collectList.find(function(data){
 		index++;
@@ -393,6 +343,18 @@ $(".color-info__like-btn").on("click",function(){
 	}
 })
 
+//加入顏色到收藏清單
+function addToCollect(color){
+	collectList.push(color);
+	refreshCollectList();
+}
+//從收藏清單刪除顏色
+function deleteFromCollect(index){
+	collectList.splice(index, 1);
+	refreshCollectList();
+}
+
+//收藏清單介面控制
 $(".color-info__collect-btn").on("click",function(){
 	$(".fcLayout").toggleClass('fcLayout--collection-active');
 })
@@ -401,6 +363,7 @@ $(".collection__opener, .collection__btn-close").on("click",function(){
 	$(".fcLayout").toggleClass('fcLayout--collection-active');
 })
 
+//編輯按鈕
 $(".collection__edit-btn").on("click",function(){
 	$(".collection__edit-btn").toggleClass('collection__edit-btn--selected');
 	$('.color-item__delete-btn').each(function(i){
