@@ -53,7 +53,7 @@
 		@mixin item ( $items ) {
 			@for $i from 1 through $items{
 				&:nth-child(#{$i}) .space__imgTextContainer{
-					background-image: url('../images/case#{$i}.jpg');
+					background-image: url('../images/space#{$i}.jpg');
 					background-size: 100% 100%;
 					background-repeat: no-repeat;
 					background-position: center center;
