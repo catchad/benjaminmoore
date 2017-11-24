@@ -96,7 +96,7 @@ gulp.task('watch', function() {
 gulp.task('webserver', function() {
     gulp.src('build/')
         .pipe(webserver({
-            // host: '0.0.0.0',
+            host: '0.0.0.0',
             port: 9527,
             livereload: true,
             directoryListing: false,

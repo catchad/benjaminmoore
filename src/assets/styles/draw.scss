@@ -32,19 +32,26 @@
 	display: flex;
 	justify-content: flex-start;
 	padding: 0;
-	margin-left: 0;
+	
 	// transform: translateX(0px);
-	transition: 0.3s;
-	// overflow-y: hidden;
+	
+	overflow-x: hidden;
+	// overflow-y: scroll;
+	>div:first-child {
+		transition: 0.3s;
+		margin-left: 0;
+	}
 	@media screen and (max-width: $breakpoint-md ) {
 	    flex-wrap: wrap;
 	}
 	&--collection-active {
-		margin-left: -250px;
-		// transform: translateX(-250px); 
+		>div:first-child {
+			margin-left: -250px;
+		}
 		@media screen and (max-width: $breakpoint-md ) {
-		    margin-left: 0;
-		    // transform: translateX(0px);
+			>div:first-child {
+				margin-left: 0;
+			}
 		    .collection {
 		    	right: 0 !important;
 		    }

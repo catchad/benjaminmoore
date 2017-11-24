@@ -1,3 +1,29 @@
+// ie array.find polyfill
+if (!Array.prototype.find) {
+  Object.defineProperty(Array.prototype, 'find', {
+    value: function(predicate) {
+      if (this == null) {
+        throw new TypeError('"this" is null or not defined');
+      }
+      var o = Object(this);
+      var len = o.length >>> 0;
+      if (typeof predicate !== 'function') {
+        throw new TypeError('predicate must be a function');
+      }
+      var thisArg = arguments[1];
+      var k = 0;
+      while (k < len) {
+        var kValue = o[k];
+        if (predicate.call(thisArg, kValue, k, o)) {
+          return kValue;
+        }
+        k++;
+      }
+      return undefined;
+    }
+  });
+}
+
 //讀取本機儲存的顏色收藏
 var collectList = localStorage.getItem("collectList");
 collectList = JSON.parse(collectList);
@@ -105,7 +131,7 @@ var ColorPicker = function(defaultColor) {
 		var y = event.pageY - $(".sv").offset().top;
 		s = (x*100)/$(".sv").outerWidth();
 		v = (($(".sv").outerHeight()-y)*100)/$(".sv").outerHeight();
-		_this.setColor({h,s,v});
+		_this.setColor({h:h,s:s,v:v});
 	})
 
 	var isSelectH = false;
@@ -115,7 +141,7 @@ var ColorPicker = function(defaultColor) {
 		var y = event.pageY - ($(".h").offset().top+$(".h").outerHeight()/2);
 		h = Math.atan2(y, x) * 180 / Math.PI;
 		h = h>=0?h:h+360;
-		_this.setColor({h,s,v});
+		_this.setColor({h:h,s:s,v:v});
 	})
 
 	// $("body").on("mousemove", function(event) {
@@ -130,7 +156,7 @@ var ColorPicker = function(defaultColor) {
 	// 		// changePickerSV(x,y);
 	// 		s = (x*100)/$(".sv").outerWidth();
 	// 		v = (($(".sv").outerHeight()-y)*100)/$(".sv").outerHeight();
-	// 		_this.setColor({h,s,v});
+	// 		_this.setColor({h:h,s:s,v:v});
 	// 	}
 	// 	if(isSelectH) {
 	// 		var x = event.pageX - ($(".h").offset().left+$(".h").outerWidth()/2);
@@ -138,7 +164,7 @@ var ColorPicker = function(defaultColor) {
 	// 		h = Math.atan2(y, x) * 180 / Math.PI;
 	// 		h = h>=0?h:h+360;
 	// 		// changePickerH(h);
-	// 		_this.setColor({h,s,v});
+	// 		_this.setColor({h:h,s:s,v:v});
 	// 	}
 	// })
 
@@ -178,58 +204,63 @@ var ColorPicker = function(defaultColor) {
 	// mobile touch
 	var htSV = new Hammer($(".sv")[0]);
 
-	htSV.on("panstart", function(ev){
+	htSV.on("panstart panmove", function(ev){
 		isSelectSV = true;
 		ev.preventDefault();
 		var x = ev.center.x - $(".sv").offset().left;
-		var y = ev.center.y + document.body.scrollTop - $(".sv").offset().top;
+		var y = ev.center.y + window.pageYOffset - $(".sv").offset().top;
+		//修正滑鼠在選擇器外面時的坐標
+		if(x < 0) x = 0;
+		if(y < 0) y = 0;
+		if(x >= $(".sv").outerWidth()) x = $(".sv").outerWidth()-1;
+		if(y >= $(".sv").outerHeight()) y = $(".sv").outerHeight()-1;
 		s = (x*100)/$(".sv").outerWidth();
 		v = (($(".sv").outerHeight()-y)*100)/$(".sv").outerHeight();
-		_this.setColor({h,s,v});
+		_this.setColor({h:h,s:s,v:v});
 	})
 	var htH = new Hammer($(".h")[0]);
 
-	htH.on("panstart", function(ev){
+	htH.on("panstart panmove", function(ev){
 		isSelectH = true;
 		ev.preventDefault();
 		var x = ev.center.x - ($(".h").offset().left+$(".h").outerWidth()/2);
-		var y = ev.center.y + document.body.scrollTop - ($(".h").offset().top+$(".h").outerHeight()/2);
+		var y = ev.center.y + window.pageYOffset - ($(".h").offset().top+$(".h").outerHeight()/2);
 		h = Math.atan2(y, x) * 180 / Math.PI;
 		h = h>=0?h:h+360;
-		_this.setColor({h,s,v});
+		_this.setColor({h:h,s:s,v:v});
 	})
 
 
-	var ht = new Hammer($("body")[0]);
-	ht.on('panstart panmove', function(ev) {
-		if(isSelectSV) {
-			ev.preventDefault();
-			var x = ev.center.x - $(".sv").offset().left;
-			var y = ev.center.y + window.pageYOffset - $(".sv").offset().top;
-			//修正滑鼠在選擇器外面時的坐標
-			if(x < 0) x = 0;
-			if(y < 0) y = 0;
-			if(x >= $(".sv").outerWidth()) x = $(".sv").outerWidth()-1;
-			if(y >= $(".sv").outerHeight()) y = $(".sv").outerHeight()-1;
-			s = (x*100)/$(".sv").outerWidth();
-			v = (($(".sv").outerHeight()-y)*100)/$(".sv").outerHeight();
-			_this.setColor({h,s,v});
-		}
-		if(isSelectH) {
-			ev.preventDefault();
-			var x = ev.center.x - ($(".h").offset().left+$(".h").outerWidth()/2);
-			var y = ev.center.y + window.pageYOffset - ($(".h").offset().top+$(".h").outerHeight()/2);
-			h = Math.atan2(y, x) * 180 / Math.PI;
-			h = h>=0?h:h+360;
-			_this.setColor({h,s,v});
-		}
-	});
-	ht.on('panend', function(ev) {
-		//結束選取顏色
-		console.log("end");
-		isSelectSV = false;
-		isSelectH = false;
-	});
+	// var ht = new Hammer($("body")[0]);
+	// ht.on('panstart panmove', function(ev) {
+	// 	if(isSelectSV) {
+	// 		ev.preventDefault();
+	// 		var x = ev.center.x - $(".sv").offset().left;
+	// 		var y = ev.center.y + window.pageYOffset - $(".sv").offset().top;
+	// 		//修正滑鼠在選擇器外面時的坐標
+	// 		if(x < 0) x = 0;
+	// 		if(y < 0) y = 0;
+	// 		if(x >= $(".sv").outerWidth()) x = $(".sv").outerWidth()-1;
+	// 		if(y >= $(".sv").outerHeight()) y = $(".sv").outerHeight()-1;
+	// 		s = (x*100)/$(".sv").outerWidth();
+	// 		v = (($(".sv").outerHeight()-y)*100)/$(".sv").outerHeight();
+	// 		_this.setColor({h:h,s:s,v:v});
+	// 	}
+	// 	if(isSelectH) {
+	// 		ev.preventDefault();
+	// 		var x = ev.center.x - ($(".h").offset().left+$(".h").outerWidth()/2);
+	// 		var y = ev.center.y + window.pageYOffset - ($(".h").offset().top+$(".h").outerHeight()/2);
+	// 		h = Math.atan2(y, x) * 180 / Math.PI;
+	// 		h = h>=0?h:h+360;
+	// 		_this.setColor({h:h,s:s,v:v});
+	// 	}
+	// });
+	// ht.on('panend', function(ev) {
+	// 	//結束選取顏色
+	// 	console.log("end");
+	// 	isSelectSV = false;
+	// 	isSelectH = false;
+	// });
 }
 
 
@@ -301,7 +332,7 @@ function getColorRange(color) {
 	for (var i = 0; i < colorlist.length; i++) {
 		var delta = Math.pow(Math.pow(colorlist[i].color[0]*255-center.r,2)+Math.pow(colorlist[i].color[1]*255-center.g,2)+Math.pow(colorlist[i].color[2]*255-center.b,2),0.5);
 		if(delta <= maxDelta) {
-			searchResult.push({color:colorlist[i],delta});
+			searchResult.push({color:colorlist[i],delta:delta});
 		}
 	}
 	//照差異度做排序
