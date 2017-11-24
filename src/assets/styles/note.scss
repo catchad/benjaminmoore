@@ -33,6 +33,9 @@
 	    @media screen and (max-width: $breakpoint-md ) {
 		    font-size: 0.9em;
 	    }
+	    @media screen and (max-width: 430px){
+	    	text-align: justify;
+	    }
 	}
 	&__imgbox{
 		width: 100%;
