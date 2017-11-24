@@ -25,9 +25,12 @@
 		}
 	}
 	&__img{
+		max-width: 170px;
+    	width: 100%;
 		transition:.5s;
-		@media screen and (max-width: $breakpoint-md){
+		@media screen and (max-width: $breakpoint-sm){
 			height:60%;
+			max-width: 140px;
 		}
 	}
 	&__text{
@@ -87,7 +90,8 @@
 		// align-items:center;
 		// flex-wrap:wrap;
 		&:hover .level__img{
-			transform: scale(1.4, 1.4) translateY(20px);
+			// transform: scale(1.4, 1.4) translateY(20px);
+			max-width: 240px;
 		}
 		&:hover .level__text{
 			opacity: 0;

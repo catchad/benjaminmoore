@@ -4,6 +4,7 @@
 .dsLayout{
 	&__fixedImgContainer {	
 		@media screen and (max-width: $breakpoint-md ) {
+		    margin-bottom: 0;
 		    &::before {
 		    	content: "";
 		    	display: block;
@@ -12,12 +13,21 @@
 		}
 	}
 }
-
+.section{
+	@media screen and (max-width: $breakpoint-md){
+		margin:30px 0px;
+		box-sizing: border-box;
+    	padding-top: 30px;
+	}
+}
 .space{
 	width: 100%;
-	height: 100%;
+	height: calc(100vh - 60px);
 	display: flex;
 	flex-wrap: wrap;
+	@media screen and (max-width: $breakpoint-md){
+		height:calc(100vh - 214px);
+	}
 	&__item{
 		width: 50%;
 		cursor:pointer;
@@ -27,6 +37,9 @@
 		&:hover .space__imgTextContainer .space__textBox,
 		&:hover .space__background{
 			opacity: 0;
+		}
+		@media screen and (max-width: $breakpoint-md){
+			height:50%;
 		}
 		@media screen and (max-width: 650px){
 			width: 50%;
@@ -40,10 +53,13 @@
 		@mixin item ( $items ) {
 			@for $i from 1 through $items{
 				&:nth-child(#{$i}) .space__imgTextContainer{
-					background-image: url('../images/case#{$i}.jpg');
+					background-image: url('../images/space#{$i}.jpg');
 					background-size: 100% 100%;
 					background-repeat: no-repeat;
 					background-position: center center;
+					@media screen and (max-width: $breakpoint-sm){
+						background-size: cover;
+					}
 				}
 				&:nth-child(#{$i}):hover .space__imgTextContainer{
 					background-size: 120% 120%;
@@ -78,11 +94,11 @@
 		margin-bottom: 15px;
 	}
 	&__text{
-		font-size: 1.6em;
+		font-size: 2em;
 	    line-height: 1.6em;
 	    letter-spacing: 0.1em;
 	    margin: 0;
-	    font-weight: 100;
+	    font-weight: 400;
 	    margin-bottom: 23px;
 	}
 	&__background{
