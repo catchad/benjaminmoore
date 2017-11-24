@@ -11,7 +11,7 @@
 .section{
 	margin-bottom: 0;
 }
-.ideal{
+.idea{
 	width: 100%;
 	height: calc(100vh - 60px);
 	display: flex;
@@ -26,8 +26,8 @@
 		position: relative;
 		overflow: hidden;
 		z-index: 1;
-		&:hover .ideal__imgTextContainer .ideal__textBox,
-		&:hover .ideal__background{
+		&:hover .idea__imgTextContainer .idea__textBox,
+		&:hover .idea__background{
 			opacity: 0;
 		}
 		@media screen and (max-width: $breakpoint-lg){
@@ -39,12 +39,12 @@
 		@media screen and (max-width: 320px){
 			width: 100%;
 		}
-		// &:hover .ideal__imgTextContainer{
+		// &:hover .idea__imgTextContainer{
 		// 	transform:scale(1.1);
 		// }
 		@mixin item ( $items ) {
 			@for $i from 1 through $items{
-				&:nth-child(#{$i}) .ideal__imgTextContainer{
+				&:nth-child(#{$i}) .idea__imgTextContainer{
 					background-image: url('../images/case#{$i}.jpg');
 					background-size: 100% 100%;
 					background-repeat: no-repeat;
@@ -53,7 +53,7 @@
 						background-size: cover;
 					}
 				}
-				&:nth-child(#{$i}):hover .ideal__imgTextContainer{
+				&:nth-child(#{$i}):hover .idea__imgTextContainer{
 					background-size: 120% 120%;
 				}
 			}
