@@ -25,12 +25,9 @@
 		height:50%;
 		position: relative;
 		overflow: hidden;
-		&:hover .news__imgTextContainer .news__textBox,
+		&:hover .news__textBox,
 		&:hover .news__background{
 			opacity: 0;
-		}
-		&:hover .news__imgTextContainer{
-			background-size: 120% 120%;
 		}
 		@media screen and (max-width: $breakpoint-lg){
 			width: 33%;
@@ -42,12 +39,11 @@
 			width: 100%;
 		}
 		&:hover .news__imgTextContainer{
-			background-size: 120% 120%;
-			background-position: center center;
+			transform:scale(1.2);
 		}
 		&:nth-child(1) .news__imgTextContainer{
 			background-image: url('../images/pow-wow1.jpg');
-			background-size: 100% 100%;
+			background-size: cover;
 			background-repeat: no-repeat;
 			background-position: center center;
 			@media screen and (max-width: $breakpoint-xl){
@@ -55,7 +51,7 @@
 			}
 		}
 		&:nth-child(1):hover .news__imgTextContainer{
-				background-size: 120% 120%;
+				transform:scale(1.2);
 			}
 		@mixin item ( $items ) {
 			@for $i from 2 through $items{
@@ -70,7 +66,7 @@
 					
 				}
 				&:nth-child(#{$i}):hover .news__imgTextContainer{
-					background-size: 120% 120%;
+					transform:scale(1.2);
 				}
 			}
 		}
@@ -91,15 +87,14 @@
 			display: block;
 			padding-bottom: 100%;
 		}
-		&--active{
-			background-size: 120% 120%;
-			background-position: center center;
-		}
 	}
 	&__textBox{
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform:translate(-50%,-50%);
 		text-align: center;
 		color:white;
-		position: relative;
 		transition:all .5s;
 		z-index: 1;
 	}
