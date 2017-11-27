@@ -11,7 +11,7 @@
 .section{
 	margin-bottom: 0;
 }
-.ideal{
+.idea{
 	width: 100%;
 	height: calc(100vh - 60px);
 	display: flex;
@@ -26,8 +26,8 @@
 		position: relative;
 		overflow: hidden;
 		z-index: 1;
-		&:hover .ideal__imgTextContainer .ideal__textBox,
-		&:hover .ideal__background{
+		&:hover .idea__textBox,
+		&:hover .idea__background{
 			opacity: 0;
 		}
 		@media screen and (max-width: $breakpoint-lg){
@@ -39,22 +39,19 @@
 		@media screen and (max-width: 320px){
 			width: 100%;
 		}
-		// &:hover .ideal__imgTextContainer{
+		// &:hover .idea__imgTextContainer{
 		// 	transform:scale(1.1);
 		// }
 		@mixin item ( $items ) {
 			@for $i from 1 through $items{
-				&:nth-child(#{$i}) .ideal__imgTextContainer{
+				&:nth-child(#{$i}) .idea__imgTextContainer{
 					background-image: url('../images/case#{$i}.jpg');
-					background-size: 100% 100%;
+					background-size: cover;
 					background-repeat: no-repeat;
 					background-position: center center;
-					@media screen and (max-width: $breakpoint-xl){
-						background-size: cover;
-					}
 				}
-				&:nth-child(#{$i}):hover .ideal__imgTextContainer{
-					background-size: 120% 120%;
+				&:nth-child(#{$i}):hover .idea__imgTextContainer{
+					transform:scale(1.2);
 				}
 			}
 		}
@@ -75,9 +72,12 @@
 		}
 	}
 	&__textBox{
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform:translate(-50%,-50%);
 		text-align: center;
 		color:white;
-		position: relative;
 		transition:all .5s;
 		z-index: 1;
 	}

@@ -34,7 +34,7 @@
 		position: relative;
 		overflow: hidden;
 		z-index: 1;
-		&:hover .space__imgTextContainer .space__textBox,
+		&:hover .space__textBox,
 		&:hover .space__background{
 			opacity: 0;
 		}
@@ -54,15 +54,12 @@
 			@for $i from 1 through $items{
 				&:nth-child(#{$i}) .space__imgTextContainer{
 					background-image: url('../images/space#{$i}.jpg');
-					background-size: 100% 100%;
+					background-size: cover;
 					background-repeat: no-repeat;
 					background-position: center center;
-					@media screen and (max-width: $breakpoint-sm){
-						background-size: cover;
-					}
 				}
 				&:nth-child(#{$i}):hover .space__imgTextContainer{
-					background-size: 120% 120%;
+					transform:scale(1.2);
 				}
 			}
 		}
@@ -83,9 +80,12 @@
 		}
 	}
 	&__textBox{
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform:translate(-50%,-50%);
 		text-align: center;
 		color:white;
-		position: relative;
 		transition:all .5s;
 		z-index: 1;
 	}
