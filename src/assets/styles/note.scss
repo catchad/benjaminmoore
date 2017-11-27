@@ -19,6 +19,7 @@
 		margin-top: 50px;
 		margin-bottom: 0;
 	}
+
 	@media screen and (max-width: $breakpoint-md){
 		&:first-child{
 			margin-top: 0px;
@@ -51,10 +52,10 @@
 		width: 100%;
 		margin: 2em 0;
 	}
+	
+}
+.title{
 	&__back{
-		position: fixed;
-		top: 100px;
-		right: 50px;
 		text-align: justify;
 	    font-size: 1em;
 	    line-height: 1.8em;
@@ -66,5 +67,9 @@
 		@media screen and (max-width: $breakpoint-xl){
 			display: none;
 		}
+	}
+	&__description:first-child{
+		display: flex;
+		justify-content: space-between;
 	}
 }
