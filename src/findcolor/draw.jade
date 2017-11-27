@@ -10,15 +10,16 @@ block body
 	main.fcLayout
 		.image
 			canvas#canvas.image__canvas
-			//- img.image__canvas(src="/assets/images/case10.png", alt="")
 		.ui
 			.ui__top
+				a.back-btn(href="/findcolor") 回上一頁→
 				.color-info
 					.color-info__name 
 					.color-info__btn-list
 						.color-info__color
 						.color-info__like-btn
 						.color-info__collect-btn
+			.ui__bottom
 				.color-picker
 					.color-picker__title 選擇色系
 					.color-picker__wheel
@@ -27,7 +28,6 @@ block body
 								.h__picker
 						.sv
 							.sv__picker
-			.ui__bottom
 				.color-select
 					.color-select__title 選擇產品顏色
 					.color-select__list

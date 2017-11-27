@@ -1,6 +1,10 @@
 // IE array.find polyfill
 Array.prototype.find||Object.defineProperty(Array.prototype,"find",{value:function(r){if(null==this)throw new TypeError('"this" is null or not defined');var t=Object(this),e=t.length>>>0;if("function"!=typeof r)throw new TypeError("predicate must be a function");for(var n=arguments[1],o=0;o<e;){var i=t[o];if(r.call(n,i,o,t))return i;o++}}});
 
+
+var isFirstDraw = true;
+var colorPicker;
+
 //讀取本機儲存的顏色收藏
 var collectList = localStorage.getItem("collectList");
 collectList = JSON.parse(collectList);
@@ -12,10 +16,6 @@ refreshCollectList();
 //4個房間的預設色彩
 var defaultColorList = ["#454b51","#6d6c6e","#e5a039","#c2d2ca"];
 var defaultColor;
-
-var isFirstDraw = true;
-
-var colorPicker;
 
 //依網址後參數設定canvas並讀取圖片
 var picIndex = 0;
@@ -87,12 +87,16 @@ function drawColor(hex) {
 }
 
 //canvas 自動resize
-$(window).resize(canvasResize);
+// $(window).resize(canvasResize);
+$(window).on("orientationchange resize load", canvasResize);
 function canvasResize() {
+	console.log("resize");
 	var containerSize = {
 	    w: $(".image").width(),
 	    h: $(".image").height()
 	};
+	console.log(containerSize);
+	// console.log(($(".image__canvas").width() / ($(".image__canvas").height()))+"\n"+(containerSize.w / containerSize.h));
     if ($(".image__canvas").width() / ($(".image__canvas").height()) > containerSize.w / containerSize.h) {
         $(".image__canvas").addClass("image__canvas--heightFirst");
     } else {
@@ -192,11 +196,12 @@ var colorlist = (function () {
 
 //選色時被觸發，進行搜尋並呈現結果
 var nowColor;
+var searchResult;
 function colorPickerChange(color) {
 	//清空搜尋結果
 	$(".color-select__list").html("");
 	//進行搜尋
-	var searchResult = getColorRange(color);
+	searchResult = getColorRange(color);
 
 	//依照搜尋結果生成結果並放入與填色
 	var colorDomTemplate = "<div data-hex='{{hex}}' data-name='{{name}}' class='color-select__color'></div>";
@@ -227,7 +232,7 @@ function colorPickerChange(color) {
 			$(".color-info__like-btn").addClass('color-info__like-btn--liked');
 		} else {
 			$(".color-info__like-btn").removeClass('color-info__like-btn--liked');
-		}
+		} 
 
 		//著色
 		drawColor($(this).data('hex'));
@@ -245,6 +250,7 @@ function colorPickerChange(color) {
 //依指定色碼，從油漆色票中進行搜尋
 //具體方式是在三維空間以(r,g,b)作為座標計算兩者距離，越近表示越相似
 var maxDelta = 30; //最大差異值
+var maxResult = 20; //搜尋結果數目上限
 function getColorRange(color) {
 	var searchResult = [];
 	var center = hexToRgb(color);
@@ -258,7 +264,8 @@ function getColorRange(color) {
 	searchResult.sort(function(a, b) {
 	  return a.delta - b.delta;
 	});
-	return searchResult;
+	//只留前幾個結果
+	return searchResult.slice(0, maxResult);
 }
 
 //色彩編碼轉換
@@ -276,6 +283,40 @@ function componentToHex(c) {
 }
 function rgbToHex(r, g, b) {
     return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+}
+
+function clickColor(color) {
+	// color.hex
+	// color.name
+
+	$(".color-info__color").css("background-color",color.hex );
+	$(".color-info__name").html(color.name);
+	var index = -1;
+	searchResult.find(function(data){
+		index++;
+		return data.color.name == color.name;
+	});
+
+	var resultDom = $('.color-select__color')[index];
+	console.log(resultDom);
+
+
+	$(".color-select__color--selected").removeClass('color-select__color--selected');
+	$(resultDom).addClass('color-select__color--selected');
+	nowColor = {hex:color.hex,name:color.name};
+
+	//確認所選顏色是否已收藏，切換收藏按鈕狀態
+	var result = collectList.find(function(data){
+		return data.name == nowColor.name;
+	});
+	if(result) {
+		$(".color-info__like-btn").addClass('color-info__like-btn--liked');
+	} else {
+		$(".color-info__like-btn").removeClass('color-info__like-btn--liked');
+	} 
+
+	//著色
+	drawColor(color.hex);
 }
 
 
@@ -308,18 +349,17 @@ function refreshCollectList() {
 
 	//按下刪除按鈕則刪除該元素
 	$(".color-item__delete-btn").on("click",function(){
+		if(nowColor.name == $(this).parent(".color-item").data('name')) {
+			$(".color-info__like-btn").removeClass('color-info__like-btn--liked');
+		}
 		var index = $(this).parent(".color-item").data("index");
 		deleteFromCollect(index);
 	})
 
 	//按下元素本身，則依元素中的資料進行填色
 	$(".color-item").on("click",function(){
-		$(".color-info__color").css("background-color",$(this).data('hex') );
-		$(".color-info__name").html($(this).data('name'));
-		$(".color-info__like-btn").addClass('color-info__like-btn--liked');
-		nowColor = {hex:$(this).data('hex'),name:$(this).data('name')};
-		drawColor($(this).data('hex'));
 		colorPicker.setColor(Color($(this).data('hex')).toHsv());
+		clickColor({hex:$(this).data('hex'),name:$(this).data('name')});
 	})
 }
 
