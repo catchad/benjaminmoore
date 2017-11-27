@@ -1,6 +1,8 @@
 @charset "UTF-8";
 @import "_common.scss";
 
+// $breakpoint-md: 100px;
+
 // main.fcLayout
 //     image
 //       canvas.image__canvas
@@ -32,23 +34,25 @@
 	display: flex;
 	justify-content: flex-start;
 	padding: 0;
-	
-	// transform: translateX(0px);
-	
 	overflow-x: hidden;
 	// overflow-y: scroll;
 	>div:first-child {
-		transition: 0.3s;
+		transition: margin 0.3s;
 		margin-left: 0;
 	}
-	@media screen and (max-width: $breakpoint-md ) {
+	@media screen and (min-height: 500px) and (max-width: $breakpoint-md ) {
 	    flex-wrap: wrap;
+	    overflow-y: hidden;
 	}
+	@media screen and (max-height: 500px) and (max-width: $breakpoint-md ) {
+	    font-size: 0.9em;
+	}
+
 	&--collection-active {
 		>div:first-child {
 			margin-left: -250px;
 		}
-		@media screen and (max-width: $breakpoint-md ) {
+		@media screen and (min-height: 500px) and (max-width: $breakpoint-md ) {
 			>div:first-child {
 				margin-left: 0;
 			}
@@ -64,6 +68,20 @@
 		height: 100%;
 		// background-color: #333;
 		overflow: hidden;
+		@media screen and (min-height: 500px) and (max-width: $breakpoint-md ) {
+		    width: 100%;
+		    height: auto;
+		    &::before {
+		    	content: "";
+		    	display: block;
+		    	width: 100%;
+		    	padding-bottom: 56.25%;
+
+		    }
+		}
+		@media screen and (max-height: 500px) and (max-width: $breakpoint-md ) {
+		    width: calc(100% - 350px);
+		}
 		&__canvas {
 			position: absolute;
 			top: 50%;
@@ -71,23 +89,19 @@
 			width: 100%;
 			height: auto;
 			transform: translate(-50%, -50%);
-			@media screen and (max-width: $breakpoint-md ) {
-				position: relative;
+			@media screen and (min-height: 500px) and (max-width: $breakpoint-md ) {
+				// position: relative;
 			    width: 100%;
 			    height: auto;
 			}
 			&--heightFirst {
 				width: auto;
 				height: 100%;
-				@media screen and (max-width: $breakpoint-md ) {
-				    width: 100%;
-				    height: auto;
-				}
+				// @media screen and (max-width: $breakpoint-md ) {
+				//     width: 100%;
+				//     height: auto;
+				// }
 			}
-		}
-		@media screen and (max-width: $breakpoint-md ) {
-		    width: 100%;
-		    height: auto;
 		}
 	}
 	.ui {
@@ -96,19 +110,28 @@
 		height: 100%;
 		flex: 0 0 auto;
 		overflow: hidden;
-		@media screen and (max-width: $breakpoint-md ) {
+		display: flex;
+		flex-direction: column;
+		@media screen and (min-height: 500px) and (max-width: $breakpoint-md ) {
 		    width: 100%;
 		    height: auto;
+		}
+		@media screen and (max-height: 500px) and (max-width: $breakpoint-md ) {
+		    width: 300px;
 		}
 		&__top {
 			position: relative;
 			width: 100%;
-			height: 350px;
 			display: flex;
 			flex-direction: column;
 			// align-items: center;
 			background-color: #FFF;
-			padding: 50px 40px 30px 40px;
+			padding: 20px 30px 0 30px;
+			flex: 0 0 auto;
+			.back-btn {
+				align-self: flex-end;
+				margin-bottom: 20px;
+			}
 			.color-info {
 				display: flex;
 				align-items: center;
@@ -153,27 +176,56 @@
 					background-position: 50% 50%;
 					background-repeat: no-repeat;
 					cursor: pointer;
-					@media screen and (max-width: $breakpoint-md ) {
+					@media screen and (min-height: 500px) and (max-width: $breakpoint-md ) {
 						display: block;
 					}
 				}
+			}
+			
+		}
+		&__bottom {
+			position: relative;
+			width: 100%;
+			// height: calc(100% - 350px);
+			flex: 1;
+			display: flex;
+			flex-direction: column;
+			@media screen and (max-width: $breakpoint-md ) {
+				display: flex;
+				padding-top: 10px;
+				font-size: 0.8em;
+				flex-direction: row;
+				justify-content: center;
 			}
 			.color-picker {
 				display: flex;
 				align-items: center;
 				flex-direction: column;
-				// justify-content: space-around;
-				// margin-bottom: 20px;
+				background-color: #FFF;
+				padding: 0 30px 20px 30px;
+				flex: 0 0 auto;
+				@media screen and (max-width: $breakpoint-md ) {
+					// height: 100%;
+					width: 40%;
+					// min-height: 100px;
+					flex: 0 0 auto;
+				}
 				&__title {
 					font-size: 1.2em;
 					align-self: flex-start;
 					margin-bottom: 20px;
+					flex: 0 0 auto;
 				}
 				&__wheel {
 					position: relative;
 					width: 160px;
 					height: 160px;
 					cursor: crosshair;
+					flex: 0 0 auto;
+					@media screen and (max-width: $breakpoint-md ) {
+						width: 100px;
+						height: 100px;
+					}
 					.h {
 						position: absolute;
 						width: 100%;
@@ -205,6 +257,10 @@
 							pointer-events: none;
 							background-color: #F00;
 							transform: translate(-50%,-50%);
+							@media screen and (max-width: $breakpoint-md ) {
+								width: 10px;
+								height: 10px;
+							}
 						}
 					}
 					.sv {
@@ -238,35 +294,37 @@
 						
 				}
 			}
-		}
-		&__bottom {
-			position: relative;
-			width: 100%;
-			height: calc(100% - 350px);
-			background-color: #f9f9f9;
-			padding: 50px 40px 30px 40px;
 			.color-select {
-				height: 100%;
+				// height: 100%;
+				background-color: #f9f9f9;
+				padding: 40px 40px 30px 40px;
+				flex: 1;
+				display: flex;
+				flex-direction: column;
 				@media screen and (max-width: $breakpoint-md ) {
-					&::after {
-						content: "";
-						width: 50px;
-						height: 100%;
-						position: absolute;
-						top: 0;
-						right: 40px;
-						background: linear-gradient(to right, rgba(#f9f9f9,0), rgba(#f9f9f9,1));
-					}
+					padding: 0 20px 0 0;
+					width: 60%;
+					background-color: #fff;
+					// &::after {
+					// 	content: "";
+					// 	width: 50px;
+					// 	height: 100%;
+					// 	position: absolute;
+					// 	top: 0;
+					// 	right: 40px;
+					// 	background: linear-gradient(to right, rgba(#f9f9f9,0), rgba(#f9f9f9,1));
+					// }
 				}
 				
 				&__title {
 					margin-bottom: 20px;
 					font-size: 1.2em;
+					flex: 0 0 auto;
 				}
 				&__list {
 					position: relative;
 					width: 100%;
-					height: 100%;
+					// height: 100%;
 					padding-bottom: 20px;
 					display: flex;
 					flex-wrap: wrap;
@@ -274,19 +332,31 @@
 					// align-items: center;
 					align-content: flex-start;
 					overflow: scroll;
+					flex: 1 1 0;
 					@media screen and (max-width: $breakpoint-md ) {
+						margin-bottom: 20px;
+						// flex-direction: column;
+						// height: 150px;
+						// flex: 0 0 auto;
+						// padding-bottom: ;
+					}
+					@media screen and (min-height: 500px) and (max-width: $breakpoint-md ) {
 						flex-direction: column;
 						height: 150px;
 					}
-
 				}
 				&__color {
 					width: 40px;
 					height: 40px;
 					border-radius: 100%;
 					border: 1px solid #000;
-					margin: 10px 20px 10px 0;
+					margin: 10px;
 					cursor: pointer;
+					@media screen and (max-width: $breakpoint-md ) {
+						width: 35px;
+						height: 35px;
+						margin: 7px;
+					}
 					&--selected {
 						border: 2px solid #000;
 					}
@@ -356,10 +426,12 @@
 			display: flex;
 			flex-direction: column;
 			padding: 50px 0;
+			overflow: scroll;
 		}
 		&__btn-list {
 			display: flex;
 			justify-content: flex-start;
+			flex: 0 0 auto;
 			margin-bottom: 30px;
 		}
 		&__edit-btn {
@@ -421,7 +493,7 @@
 				font-size: 0.9em;
 			}
 		}
-		@media screen and (max-width: $breakpoint-md ) {
+		@media screen and (min-height: 500px) and (max-width: $breakpoint-md ) {
 			position: fixed;
 			top: 0;
 			right: -100%;
@@ -436,11 +508,6 @@
 				padding: 50px 0 0 50px;
 			}
 		}
-	}
-
-	#color-picker {
-		position: absolute;
-		top: -9999px;
 	}
 }
 	
