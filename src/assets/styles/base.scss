@@ -127,6 +127,10 @@ a {
 	&__item {
 		display: inline-block;
 		margin-right: 2em;
+		transition: color 0.1s ease-out;
+		&:hover {
+			color: #878787;
+		}
 		&:last-child {
 			margin-right: 0;
 		}
@@ -136,8 +140,42 @@ a {
 		    margin: 20px 0;
 
 		}
-
-
+	}
+	
+	&--about {
+		.nav__item:nth-child(1) {
+			color: #878787;	
+		}
+	}
+	&--product {
+		.nav__item:nth-child(2) {
+			color: #878787;	
+		}
+	}
+	&--findcolor {
+		.nav__item:nth-child(3) {
+			color: #878787;	
+		}
+	}
+	&--inspiration {
+		.nav__item:nth-child(4) {
+			color: #878787;	
+		}
+	}
+	&--showcase {
+		.nav__item:nth-child(5) {
+			color: #878787;	
+		}
+	}
+	&--news {
+		.nav__item:nth-child(6) {
+			color: #878787;	
+		}
+	}
+	&--contact {
+		.nav__item:nth-child(7) {
+			color: #878787;	
+		}
 	}
 }
 
@@ -483,6 +521,26 @@ a {
 	&__img {
 		width: 300px;
 		height: auto;
+	}
+}
+
+.return {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	&--absoluteTopRight {
+		position: absolute;
+		top: 15px;
+		right: 15px;
+	}
+	&__text {
+		font-size: 1em;
+		margin-right: 5px;
+	}
+
+	&__icon {
+		position: relative;
+		width: 30px;
 	}
 }
 

@@ -12,20 +12,28 @@ mixin vTab(data)
 							p(class="vTab__text") #{text}
 
 
+//- mixin level(data)
+//- 	ul(class="level")
+//- 		each item in data
+//- 			li(class="level__item")
+//- 				a(class="level__link" href="/product/page1")
+//- 					div(class="level__sticker")  #{item.sticker}
+//- 					div(class="level__imgTextContainer")
+//- 						img(class="level__img" src="/assets/images/#{item.url}.png")
+//- 						div(class="level__text")
+//- 							h3(class="level__eng") #{item.title}
+//- 							p(class="level__chi") #{item.name}
+
+
 mixin level(data)
 	ul(class="level")
 		each item in data
 			li(class="level__item")
 				a(class="level__link" href="/product/page1")
 					div(class="level__sticker")  #{item.sticker}
-					div(class="level__imgTextContainer")
-						img(class="level__img" src="/assets/images/#{item.url}.png")
-						div(class="level__text")
-							h3(class="level__eng") #{item.title}
-							p(class="level__chi") #{item.name}
-
-					
-
+					img(class="level__img" src="/assets/images/#{item.url}.png")
+					h3(class="level__eng") #{item.title}
+					p(class="level__chi") #{item.name}
 
 mixin space(data)
 	ul(class="space")

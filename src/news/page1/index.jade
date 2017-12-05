@@ -2,6 +2,7 @@ extends /jadeTemplate/_layout.jade
 
 block variables
 	- var pageTitle = "最新消息";
+	- var pageClassName = "news";
 
 block style
 	link(rel="stylesheet", href="/assets/styles/note.css")
@@ -13,8 +14,10 @@ block body
 				div.dsLayout__fixedImgContainer.dsLayout__fixedImgContainer--active
 					img.dsLayout__fixedImg(src="/assets/images/pow-wow2.jpg", alt="")
 				div.title
-					p.title__description 2017.11.30
-						a.title__back(href="/news/") 最新消息
+					.title__description 2017.11.30
+						a.return(href="/news/")
+							p.return__text 最新消息
+							img.return__icon(src="/assets/images/return.svg")
 					p.title__name POW WOW 
 				p.section__text 在我們剛剛進入台灣的這些日子，有幸剛好碰到國際藝術組織POW WOW，聽完他們的理念我們決定加入贊助的行列，運用我們油漆鮮豔多變的色彩以及無毒低氣味的特性，不僅讓作畫輕鬆也讓環境更清新，也讓台北增加更深刻的藝術文化。
 				p.section__text POW! -是揣摩藝術與人產生的碰撞，感覺就像一記拳頭打在臉上。
