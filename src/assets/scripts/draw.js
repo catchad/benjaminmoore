@@ -24,10 +24,11 @@ var imgBgUrl = "../assets/images/pic{{index}}_bg.png";
 var imgWallUrl = "../assets/images/pic{{index}}_mask.png";
 setPicUrl();
 function setPicUrl(){
-	if(window.location.href.indexOf('?') != -1) {
-		var hash = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-		if(hash>=1 && hash<=4) {
-			picIndex = hash[0];
+	var vars = getUrlVars();
+	//設定房間
+	if(vars.room) {
+		if(vars.room>=1 && vars.room<=4) {
+			picIndex = vars.room;
 		} else {
 			picIndex = 1;
 		}
@@ -35,8 +36,35 @@ function setPicUrl(){
 		picIndex = 1;
 	}
 	//設定預設顏色
-	defaultColor = defaultColorList[picIndex-1];
+	if(vars.color) {
+		if(/^#[0-9A-F]{6}$/i.test('#'+vars.color)) {
+			defaultColor = "#"+vars.color;
+		} else {
+			defaultColor = defaultColorList[picIndex-1];
+		}
+	} else {
+		defaultColor = defaultColorList[picIndex-1];
+	}
 }
+
+function getUrlVars(){
+  var vars = [], hash;
+  var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+  for(var i = 0; i < hashes.length; i++)
+  {
+      hash = hashes[i].split('=');
+      vars.push(hash[0]);
+      vars[hash[0]] = hash[1];
+  }
+  return vars;
+}
+
+function updateUrl(hex){
+	var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?room='+picIndex+'&color='+hex.substring(1,hex.length);
+	window.history.pushState({path:newurl},'',newurl);
+}
+
+
 //設定圖片路徑
 imgBgUrl = imgBgUrl.replace("{{index}}",picIndex);
 imgWallUrl = imgWallUrl.replace("{{index}}",picIndex);
@@ -80,6 +108,7 @@ function imgInit() {
 
 //canvas上色
 function drawColor(hex) {
+	updateUrl(hex);
 	ctx.fillStyle = hex;
 	ctx.fillRect(0,0,canvas.width,canvas.height);
 	ctx.drawImage(imgWall,0,0);
