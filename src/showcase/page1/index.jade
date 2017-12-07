@@ -2,6 +2,7 @@ extends /jadeTemplate/_layout.jade
 
 block variables
 	- var pageTitle = "案例分享";
+	- var pageClassName = "showcase";
 
 block style
 	link(rel="stylesheet", href="/assets/styles/note.css")
@@ -13,8 +14,10 @@ block body
 				div.dsLayout__fixedImgContainer.dsLayout__fixedImgContainer--active
 					img.dsLayout__fixedImg(src="/assets/images/show1.jpg", alt="")
 				div.title
-					p.title__description 2017.10.31
-						a.title__back(href="/showcase/") 案例分享
+					.title__description 2017.10.31
+						a.return(href="/news/")
+							p.return__text 案例分享
+							img.return__icon(src="/assets/images/return.svg")
 					p.title__name 新竹寶山 
 				p.section__text 實際案例分享，新竹劉小姐透過網路找到美國班傑明．摩爾油漆，由於劉小姐住家大門長年日曬雨淋，流露出歲月的痕跡，然而換大門不僅做工複雜、過程雜亂、造價昂貴，我們建議她使用抗UV高光大門專用漆來更新她們家的大門，使用班傑明．摩爾油漆進行更新不僅省錢、省時、環保、變化多樣。
 				img.section__img(src="/assets/images/showcase2.jpg", alt="")
