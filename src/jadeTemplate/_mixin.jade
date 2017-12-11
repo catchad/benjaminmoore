@@ -47,7 +47,7 @@ mixin space(data)
 					div(class="space__background")
 
 
-mixin idea(data)
+//- mixin idea(data)
 	ul(class="idea")
 		each item in data
 			li(class="idea__item")
@@ -58,17 +58,17 @@ mixin idea(data)
 						p(class="idea__text") #{item.text}
 					div(class="idea__background") 
 
-
-mixin case(data)
-	ul(class="case")
+mixin gallery(data)
+	ul(class="gallery")
 		each item in data
-			li(class="case__item")
-				a(class="case__link" href="/showcase/page1")
-					div(class="case__imgTextContainer")
-					div(class="case__textBox")
-						h3(class="case__title") #{item.title}
-						p(class="case__text") #{item.text}
-					div(class="case__background")
+			li(class="gallery__item")
+				a(class="gallery__link" href="#{item.link}")
+					div(class="gallery__thumbnail", style="background-image: url('#{item.img}')")
+					div(class="gallery__caption")
+						p(class="gallery__title") #{item.title}
+						p(class="gallery__text") #{item.text}
+
+
 
 
 mixin news(data)
