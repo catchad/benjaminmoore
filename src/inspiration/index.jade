@@ -11,6 +11,7 @@ block body
 	main.inLayout
 		div.inLayout__wrapper
 			section.section
+				canvas(class="gallery__fakeGrid")
 				+gallery([
 					{title:"2018色彩趨勢",text:"假字假字假字假字假字假字假字", img:"/assets/images/case1.jpg", link:"/inspiration/page1/"},
 					{title:"色彩靈感1",text:"假字假字假字假字假字假字假字", img:"/assets/images/case1.jpg", link:"/inspiration/page1/"},
@@ -33,3 +34,4 @@ block body
 			//- 			div.background
 
 block script
+	script(src="/assets/scripts/fakegrid.js")

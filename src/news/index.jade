@@ -11,16 +11,9 @@ block body
 	main.shLayout
 	div.shLayout__wrapper
 		section.section
+			canvas(class="gallery__fakeGrid")
 			+gallery([
-				{title:"最新消息0",text:"假字假字假字假字假字假字假字", img:"/assets/images/case1.jpg", link:"/news/page1/"},
-				{title:"最新消息1",text:"假字假字假字假字假字假字假字", img:"/assets/images/case1.jpg", link:"/news/page1/"},
-				{title:"最新消息2",text:"假字假字假字假字假字假字假字", img:"/assets/images/case1.jpg", link:"/news/page1/"},
-				{title:"最新消息3",text:"假字假字假字假字假字假字假字", img:"/assets/images/case1.jpg", link:"/news/page1/"},
-				{title:"最新消息4",text:"假字假字假字假字假字假字假字", img:"/assets/images/case1.jpg", link:"/news/page1/"},
-				{title:"最新消息5",text:"假字假字假字假字假字假字假字", img:"/assets/images/case1.jpg", link:"/news/page1/"},
-				{title:"最新消息6",text:"假字假字假字假字假字假字假字", img:"/assets/images/case1.jpg", link:"/news/page1/"},
-				{title:"最新消息7",text:"假字假字假字假字假字假字假字", img:"/assets/images/case1.jpg", link:"/news/page1/"},
-				{title:"最新消息8",text:"假字假字假字假字假字假字假字", img:"/assets/images/case1.jpg", link:"/news/page1/"}
+				{title:"最新消息0",text:"假字假字假字假字假字假字假字", img:"/assets/images/case1.jpg", link:"/news/page1/"}
 			])
 
 			//- ul.news
@@ -34,3 +27,4 @@ block body
 
 
 block script
+	script(src="/assets/scripts/fakegrid.js")

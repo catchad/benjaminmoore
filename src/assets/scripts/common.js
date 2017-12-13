@@ -25,6 +25,9 @@ var ImgLoadedChecker = function(params) {
             $(this).on('load', function(event) {
                 imgLoaded(el);
             });
+            $(this).on('error', function(event) {
+                imgLoaded(el);
+            });
         } else {
             imgLoaded(el);
         }
@@ -139,3 +142,12 @@ new ImgLoadedChecker({
 });
 
 
+$(".header__hamburger").on('click', function(event) {
+    $(".nav").toggleClass("nav--active");
+    $(".header__hamburger").toggleClass("header__hamburger--close");
+    if( $(".nav").hasClass("nav--active") ) {
+        TweenMax.killTweensOf($(".nav__item"));
+        TweenMax.staggerFromTo($(".nav__item"), 0.5, {x:-50, opacity:0}, {x:0, opacity:1, ease:Power3.easeOut}, 0.05);
+    }
+    
+});

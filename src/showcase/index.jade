@@ -11,17 +11,11 @@ block body
 	main.shLayout
 	div.shLayout__wrapper
 		section.section
+			canvas(class="gallery__fakeGrid")
 			+gallery([
-				{title:"新竹寶山",text:"假字假字假字假字假字假字假字", img:"/assets/images/show1.jpg", link:"/showcase/page1/"},
-				{title:"案例分享1",text:"假字假字假字假字假字假字假字", img:"/assets/images/show1.jpg", link:"/showcase/page1/"},
-				{title:"案例分享2",text:"假字假字假字假字假字假字假字", img:"/assets/images/show1.jpg", link:"/showcase/page1/"},
-				{title:"案例分享3",text:"假字假字假字假字假字假字假字", img:"/assets/images/show1.jpg", link:"/showcase/page1/"},
-				{title:"案例分享4",text:"假字假字假字假字假字假字假字", img:"/assets/images/show1.jpg", link:"/showcase/page1/"},
-				{title:"案例分享5",text:"假字假字假字假字假字假字假字", img:"/assets/images/show1.jpg", link:"/showcase/page1/"},
-				{title:"案例分享6",text:"假字假字假字假字假字假字假字", img:"/assets/images/show1.jpg", link:"/showcase/page1/"},
-				{title:"案例分享7",text:"假字假字假字假字假字假字假字", img:"/assets/images/show1.jpg", link:"/showcase/page1/"},
-				{title:"案例分享8",text:"假字假字假字假字假字假字假字", img:"/assets/images/show1.jpg", link:"/showcase/page1/"}
+				{title:"新竹寶山",text:"假字假字假字假字假字假字假字", img:"/assets/images/show1.jpg", link:"/showcase/page1/"}
 			])
+			
 
 			//- ul.case
 			//- 	li.case__item
@@ -33,4 +27,4 @@ block body
 			//- 			div.background
 
 block script
-
+	script(src="/assets/scripts/fakegrid.js")

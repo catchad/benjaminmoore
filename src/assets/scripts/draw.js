@@ -61,7 +61,7 @@ function getUrlVars(){
 
 function updateUrl(hex){
 	var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?room='+picIndex+'&color='+hex.substring(1,hex.length);
-	window.history.pushState({path:newurl},'',newurl);
+	window.history.replaceState({path:newurl},'',newurl);
 }
 
 
@@ -390,7 +390,15 @@ function refreshCollectList() {
 		colorPicker.setColor(Color($(this).data('hex')).toHsv());
 		clickColor({hex:$(this).data('hex'),name:$(this).data('name')});
 	})
+
+	// 更新 mailto 的參數
+	var emailLink = "mailto:bm@sensedesign.com.tw?subject=你好，我想了解這幾個顏色&body=";
+	for( var i=0; i<collectList.length; i++ ) {
+		emailLink += collectList[i].name + "%0D%0A";
+	}
+	$(".collection__mail-btn").attr("href", emailLink);
 }
+
 
 
 //收藏按鈕

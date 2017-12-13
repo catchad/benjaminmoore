@@ -1,0 +1,146 @@
+extends /jadeTemplate/_layout.jade
+
+block variables
+	- var pageTitle = "test";
+
+block style
+
+block body
+	// Name: AURA, SeriesName: 永恆系列, CategoryName: 室內漆, image:'/_upload/product/1.png', URL: aura1
+	+productForRugo({
+		p:['522 霧光 Matte', '526 緞光 Satin', '528 半光 Semi Gloss'],
+		li:['全壓克力乳膠基底', 'Color Lock 鎖色專利，色彩歷久不衰', '覆蓋力超強', '防止黴菌滋生', '容易擦洗', '零VOC', '低氣味']
+	})
+
+	// Name: NATURA, SeriesName: 自然系列, CategoryName: 室內漆, image:'/_upload/product/2.png', URL: natura
+	+productForRugo({
+		p:['512 平光 Flat', '513 蛋殼光 Eggshell'],
+		li:['全壓克力乳膠基底', '北美氣喘及過敏協會認證', '色彩鮮豔持久', '覆蓋力強', '防止黴菌滋生', '容易擦洗', '零VOC', '低氣味']
+	})
+
+	// Name: REGAL SELECT, SeriesName: 經典系列, CategoryName:室內漆, image:'/_upload/product/3.png', URL: regal-select
+	+productForRugo({
+		p:['547 平光 Flat', '548 霧光 Matte', '549 蛋殼光 Eggshell'],
+		li:['全壓克力乳膠基底', '色彩鮮豔持久', '覆蓋力強', '防止黴菌滋生', '容易擦洗', '零VOC', '低氣味']
+	})
+
+	// Name: ULTRA SPEC 500, SeriesName: 極緻系列, CategoryName: 室內漆, image:'/_upload/product/4.png', URL: ultra-spec-500
+	+productForRugo({
+		p:['N536 平光 Flat', 'N538 蛋殼光 Eggshell'],
+		li:['壓克力聚合基底', '快乾、施工快', '覆蓋力性好', '防飛濺', '容易擦洗', '零VOC', '低氣味', '美國油漆協會MPI認證']
+	})
+
+
+	// Name: AURA, SeriesName: 永恆系列, CategoryName: 室外漆, image:'/_upload/product/5.png', URL: aura2
+	+productForRugo({
+		p:['629 平光 Flat', '634 低光 Low Lustre'],
+		li:['全壓克力乳膠基底', 'Color Lock 鎖色專利，色彩歷久不衰', '覆蓋力超強', '防止黴菌滋生', '超強耐候性', '低VOC', '低氣味']
+	})
+
+
+	// Name: FRESH START, SeriesName: 多功能底漆, CategoryName: 底漆, image:'/_upload/product/6.png', URL: fresh-start
+	+productForRugo({
+		p:['N023 高效能', 'N046 高覆蓋'],
+		li:['全壓克力乳膠基底', '覆蓋力超強', '強力髒污隔離', '室內外通用', '快乾，防飛濺', '防止黴菌滋生', '低VOC', '低氣味']
+	})
+
+
+	// Name: NATURA PRIMER, SeriesName: 自然系列, CategoryName: 底漆, image:'/_upload/product/7.png', URL: natura-primer
+	+productForRugo({
+		p:['511 抗過敏底漆'],
+		li:['全壓克力乳膠基底', '北美氣喘及過敏協會認證', '快乾、防飛濺', '覆蓋力超強', '零VOC', '零氣味']
+	})
+
+	// Name: UNTRA SPEC 500 PRIMER, SeriesName: 極緻系列, CategoryName: 底漆, image:'/_upload/product/8.png', URL: ultra-spec-500-primer
+	+productForRugo({
+		p:['N534 室內全效底漆'],
+		li:['壓克力聚合基底', '覆蓋力超強', '快乾，防飛濺', '施工方便簡易', '肥皂、清水清潔', '零VOC', '低氣味', '美國油漆協會MPI認證']
+	})
+
+
+	// Name: ULTRA SPEC HP ACRYLIC METAL PRIME, SeriesName: 極緻系列, CategoryName: 底漆, image:'/_upload/product/9.png', URL: ultra-spec-hp-acrylic-metal-prime
+	+productForRugo({
+		p:['HP04 (0P0401) 金屬底漆'],
+		li:['壓克力基底', '水性配方', '鍍鋅金屬可用', '防鏽', '快乾', '絕佳附著力', '低VOC', '低氣味']
+	})
+
+	// Name: SURE SEAL LATEX PRIMER SEALER, SeriesName: 戶外底漆, CategoryName: 底漆, image:'/_upload/product/10.png', URL: sure-seal-latex-primer-sealer
+	+productForRugo({
+		p:['027 室內/外全效底漆'],
+		li:['全壓克力乳膠基底', '附著力強', '封閉性強', '強力髒污隔離', '防止黴菌滋生', '快乾，防飛濺', '低VOC', '低氣味']
+	})
+
+
+
+	// Name: ADVANCE INTERIOR PAINT- PRIMER, SeriesName: 木器底漆, CategoryName: 底漆, image:'/_upload/product/11.png', url: advance-interior-paint-primer
+	+productForRugo({
+		p:['790 木器專用底漆'],
+		li:['水性醇酸樹脂', '防飛濺', '容易施工', '自平性強', '強力髒污隔離', '低VOC', '低氣味']
+	})
+
+
+	// Name: CEILING PAINT, SeriesName: 天花板漆, CategoryName: 特殊漆, image:'/_upload/product/12.png', URL: ceiling-paint
+	+productForRugo({
+		p:['508 特平光 Ultra Flat'],
+		li:['全壓克力乳膠基底', '強力遮瑕能力', '快乾、施工快', '覆蓋力性好', '防飛濺', '容易擦洗', '零VOC', '低氣味']
+	})
+
+	// Name: CHALKBOARD, SeriesName: 浴室專用漆, CategoryName: 特殊漆, image:'/_upload/product/13.png', URL: chalkboard
+	+productForRugo({
+		p:['532 霧光 Matte'],
+		li:['壓克力樹脂基底', 'Color Lock 鎖色專利，色彩歷久不衰', '覆蓋力超強', '加強防黴配方', '容易擦洗', '零VOC', '低氣味'
+]
+	})
+	// Name: SCUFF-X, SeriesName: 超耐磨漆, CategoryName: 特殊漆, image:'/_upload/product/14.png', URL: scuff-x
+	+productForRugo({
+		p:['484 霧光 Matte', '485 蛋殼光 Eggshell', '486 緞光 Satin'],
+		li:['壓克力聚合基底', '強力耐刮耐磨配方', '單劑式配方，可調色', '覆蓋力性好', '防飛濺', '容易清潔', '低氣味', '低VOC']
+	})
+	// Name: Chalkboard Paint, SeriesName: 黑板漆, CategoryName: 特殊漆, image:'/_upload/product/15.png', URL: chalkboard-paint
+	+productForRugo({
+		p:['308 蛋殼光 Eggshell'],
+		li:['全壓克力乳膠基底', '施工方便簡易', '上千種色彩選擇', '防飛濺', '容易擦洗', '零VOC', '低氣味']
+	})
+
+
+	// Name: STUDIO FINISHES, SeriesName: 工藝漆, CategoryName: 特殊漆, image:'/_upload/product/16.png', URL: studio-finishes
+	+productForRugo({
+		p:['620 半光 Semi Gloss'],
+		li:['壓克力乳膠基底', '施工方便簡易', '防飛濺', '快乾', '金屬亮面質感']
+	})
+
+	// Name: INSL-X STIX® PRIMER, SeriesName: 特殊底漆, CategoryName: 易速克, image:'/_upload/product/17.png', URL: insl-x-stix-primer
+	+productForRugo({
+		p:['SXA110099'],
+		li:['壓克力聚氨酯基底', '光滑面強力附著', '適用於：玻璃、磁磚...等', '低氣味', '白色']
+	})
+	// Name: INSL-X WATER BLOCK, SeriesName: 防水漆, CategoryName: 易速克, image:'/_upload/product/18.png', URL: insl-x-water-block
+	+productForRugo({
+		p:['AMW100099 平光 Flat'],
+		li:['乳膠基底', '特殊防水配方', '低氣味', '可讓地下室牆面維持乾燥', '防止黴菌滋生', '耐鹼']
+	})
+	// Name: INSL-X SURE STEP, SeriesName: 防滑漆, CategoryName: 易速克, image:'/_upload/product/19.png', URL: insl-x-sure-step
+	+productForRugo({
+		p:['SU0308092 平光 Flat'],
+		li:['壓克力聚合基底', '特殊防滑配方', '快乾好施工', '隙縫填補', '積水防護', '耐磨配方']
+	})
+
+
+
+	// Name: ADVANCE, SeriesName: 木器漆, CategoryName: 木器漆, image:'/_upload/product/20.png', URL: advance
+	+productForRugo({
+		p:['792 緞光 Satin', '793 半光 Semi Gloss', '794 高光 High Gloss'],
+		li:['水性醇酸樹脂', '表面硬度強', '防飛濺', '容易擦洗', '施工簡易', '低VOC']
+	})
+	// Name: GRAND ENTRANCE, SeriesName: 大門漆, CategoryName: 木器漆, image:'/_upload/product/21.png', URL: grand-entrance
+	+productForRugo({
+		p:['148 高光 High Gloss'],
+		li:['水性醇酸樹脂', '覆蓋力超強', '容易施工', '低VOC', '抗UV']
+	})
+	// Name: STAYS CLEAR, SeriesName: 透明漆, CategoryName: 木器漆, image:'/_upload/product/22.png', URL: stays-clear
+	+productForRugo({
+		p:['422 高光 High Gloss', '423 低光 Low Lustre', '425 平光 Flat'],
+		li:['壓克力聚氨酯基底', '透明不泛黃', '快乾，施工快速', '肥皂、清水清潔', '低氣味']
+	})
+
+block script

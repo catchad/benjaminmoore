@@ -39,7 +39,7 @@ mixin space(data)
 	ul(class="space")
 		each item in data
 			li(class="space__item")
-				a(class="space__link" href="/findcolor/draw.html?#{item.link}")
+				a(class="space__link" href="/findcolor/draw.html?room=#{item.link}")
 					div(class="space__imgTextContainer")
 					div(class="space__textBox")
 						h2(class="space__title") #{item.title}
@@ -81,3 +81,11 @@ mixin news(data)
 						h3(class="news__title") #{item.title}
 						p(class="news__text") #{item.text}
 					div(class="news__background")
+
+
+mixin productForRugo(data)
+	ul
+		each item in data.li
+			li #{item}
+	each item in data.p
+		p #{item}

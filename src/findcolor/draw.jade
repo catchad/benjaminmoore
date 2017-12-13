@@ -13,7 +13,11 @@ block body
 			canvas#canvas.image__canvas
 		.ui
 			.ui__top
-				a.back-btn(href="/findcolor") 回上一頁→
+				//- a.back-btn(href="/findcolor") 回上一頁→
+				a.return.return--findcolor(href="/findcolor/")
+					p.return__text 尋找顏色
+					img.return__icon(src="/assets/images/return.svg")
+
 				.color-info
 					.color-info__name 
 					.color-info__btn-list
@@ -41,7 +45,7 @@ block body
 			.collection__container
 				.collection__btn-list
 					.collection__edit-btn
-					.collection__mail-btn
+					a.collection__mail-btn
 				.collection__title 我收藏的顏色
 				.collection__list
 					//- .color-item

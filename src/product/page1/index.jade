@@ -15,21 +15,15 @@ block body
 				div.dsLayout__fixedImgContainer.dsLayout__fixedImgContainer--active
 					img.dsLayout__fixedImg(src="/assets/images/aura.png", alt="")
 				div.title
-					p.title__name
+					p.title__name.title__name--product
 						|NATURA
 						br
 						|自然系列
-				p.section__text 512 平光 FLAT
-				p.section__text 513 蛋殼光 EGGSHELL
-				p.section__text 514 半光-GLOSS
-				a.section__back(href="/news/") 產品介紹
-				ul.details
-					li.details__item 氣喘及過敏基金會認證
-					li.details__item 零VOC、快速返回服務
-					li.details__item 100%丙烯酸、有底漆功效
-					li.details__item 零排放(應用後4小時測量)
-					li.details__item 快乾、好上漆、防飛濺
-					li.details__item 好清潔、可擦洗、不退色
-					li.details__item 無限色彩選擇
+				div.maintain
+					+productForRugo({
+						p:['522 霧光 Matte', '526 緞光 Satin', '528 半光 Semi Gloss'],
+						li:['全壓克力乳膠基底', 'Color Lock 鎖色專利，色彩歷久不衰', '覆蓋力超強', '防止黴菌滋生', '容易擦洗', '零VOC', '低氣味']
+					})
+
 
 block script
