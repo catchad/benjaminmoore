@@ -231,7 +231,9 @@ function colorPickerChange(color) {
 	$(".color-select__list").html("");
 	//進行搜尋
 	searchResult = getColorRange(color);
-
+	if(!searchResult.length) {
+		$(".color-select__list").append("<div class='color-select__no-match'>無相似顏色產品</div>");
+	}
 	//依照搜尋結果生成結果並放入與填色
 	var colorDomTemplate = "<div data-hex='{{hex}}' data-name='{{name}}' class='color-select__color'></div>";
 	for (var i = 0; i < searchResult.length; i++) {
