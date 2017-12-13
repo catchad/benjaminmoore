@@ -92,3 +92,12 @@
 	    }
 	}
 }
+
+
+.return {
+	@media screen and (max-width: $breakpoint-xs){
+		&__text {
+			display: none;
+		}
+	}
+}

@@ -118,6 +118,7 @@
 		}
 		@media screen and (max-height: 500px) and (max-width: $breakpoint-md ) {
 		    width: 300px;
+		    overflow: auto;
 		}
 		&__top {
 			position: relative;

@@ -42,6 +42,7 @@ a {
 		line-height: 1.8em;
 		letter-spacing: 0.1em;
 		text-align: justify;
+		word-break: break-all;
 		margin: 2em 0;
 	    @media screen and (max-width: $breakpoint-md ) {
 		    font-size: 0.9em;
